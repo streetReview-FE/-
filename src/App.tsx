@@ -1,11 +1,13 @@
 import './App';
-import GoogleMaps from './components/GoogleMaps';
+import Router from './Router';
+import { GlobalStyle } from './Styles/GlobalStyle';
 
 const App = () => {
   return (
-    <div className='App'>
-      <GoogleMaps/>
-    </div>
+    <>
+    <GlobalStyle/>
+    <Router/>
+    </>
   )
 }
 
