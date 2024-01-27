@@ -45,7 +45,7 @@ const MyPageNav = ({ selectedIcon }: MypageSelectedIconProp ) => {
       <MypageNavIcon path={PagePath.MypageRivew} label="내 리뷰" img={IconReview} />
       <MypageNavIcon path={PagePath.MypageMycomment} label="내 댓글" img={IconComment} />
       <MypageNavIcon path={PagePath.MypageLikecomment} label="좋아요한 댓글" img={IconCommentHeart} />
-      <MypageNavIcon path={PagePath.MypageMycomment} label="탈퇴하기" img={IconRemoveUser} />
+      <MypageNavIcon path={PagePath.MypageUserSecession} label="탈퇴하기" img={IconRemoveUser} />
     </MyPageNavWrapper>
   );
 };
