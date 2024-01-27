@@ -8,7 +8,7 @@ export const GlobalStyle = createGlobalStyle`
   box-sizing : border-box;
 }
 body {
-  margin : 0 auto;
-  width: 1400px;
+  margin : 0;
 }
 `;
+  // width: 1400px;
