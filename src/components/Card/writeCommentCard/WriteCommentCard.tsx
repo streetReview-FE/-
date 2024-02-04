@@ -30,9 +30,7 @@ const WriteCommentCard: React.FC<MyCommentCardProps> = ({
       <IconImg
         as={img}
         fill={
-          index % 2 === 0
-            ? "rgba(76, 185, 231, 1)"
-            : "rgba(156, 156, 156, 1)"
+          index % 2 === 0 ? "rgba(76, 185, 231, 1)" : "rgba(156, 156, 156, 1)"
         }
       />
     );
@@ -47,7 +45,7 @@ const WriteCommentCard: React.FC<MyCommentCardProps> = ({
             : date.toString().slice(-2)}
         </MyCommentDate>
       </MyCommentDateWrapper>
-      <MyCommentContentWrapper isOdd={index % 2 == 0}>
+      <MyCommentContentWrapper $isOdd={index}>
         {/* 내코멘트 */}
         <MyCommentContent>
           <EventUserImg src={test_userimg} alt="testUserImg" />
@@ -55,7 +53,7 @@ const WriteCommentCard: React.FC<MyCommentCardProps> = ({
             <EventTitle>#{title}</EventTitle>
             <EventContentText>{contentText}</EventContentText>
           </div>
-          <EventImg img={img} />
+          <EventImg $img={img} />
         </MyCommentContent>
       </MyCommentContentWrapper>
       <MypageNavIcon path={""} index={index} img={Iconarrow} />
@@ -88,7 +86,7 @@ const MyCommentDate = styled.div`
   font-weight: 600;
   line-height: 100%; /* 2.25rem */
 `;
-const MyCommentContentWrapper = styled.div<{ isOdd: boolean }>`
+const MyCommentContentWrapper = styled.div<{ $isOdd: number }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,7 +94,9 @@ const MyCommentContentWrapper = styled.div<{ isOdd: boolean }>`
   height: 4.5625rem;
   border-radius: 1.25rem;
   background: ${(props) =>
-    props.isOdd ? "rgba(171, 223, 241, 0.49)" : "rgba(231, 231, 231, 1)"};
+    props.$isOdd % 2 === 0
+      ? "rgba(171, 223, 241, 0.49)"
+      : "rgba(231, 231, 231, 1)"};
 `;
 const MyCommentContent = styled.div`
   display: flex;
@@ -118,13 +118,13 @@ const EventTitle = styled.div`
   font-size: 0.75rem;
   font-weight: 600;
 `;
-const EventImg = styled.div<{ img: string }>`
+const EventImg = styled.div<{ $img: string }>`
   display: flex;
   margin-left: auto;
   width: 1.9375rem;
   height: 1.9375rem;
   border-radius: 0.3125rem;
-  background: ${(props) => `url(${props.img})`};
+  background: ${(props) => `url(${props.$img})`};
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

@@ -47,7 +47,7 @@ const WriteLikeCommentCard: React.FC<MyCommentCardProps> = ({
             </div>
             <LikeCommentBoxContenText>{contentText}</LikeCommentBoxContenText>
           </LikeCommentBoxContent>
-          <LikeCommentBoxImg img={img} />
+          <LikeCommentBoxImg $img={img} />
         </LikeCommentBox>
       </LikeCommentBoxWrapper>
       <MypageNavIcon path={""} img={Iconarrow} />
@@ -125,11 +125,11 @@ const LikeCommentBoxContenText = styled.div`
   font-weight: 700;
   margin-top: 0.13rem;
 `;
-const LikeCommentBoxImg = styled.div<{ img: string }>`
+const LikeCommentBoxImg = styled.div<{ $img: string }>`
   width: 2.875rem;
   height: 2.875rem;
   border-radius: 0.3125rem;
-  background: ${(props) => `url(${props.img})`};
+  background: ${(props) => `url(${props.$img})`};
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

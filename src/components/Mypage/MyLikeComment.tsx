@@ -108,21 +108,19 @@ const MyLikeComment = () => {
         <LikeCommentGradation />
         {myLikeCommentCardArray
           .slice(CurrentIndex, CurrentIndex + Maximumitems)
-          .map((comment, index) => {
-            return (
-              <LikeComment>
-                <React.Fragment key={index}>
-                  <WriteLikeCommentCard
-                    nickname={comment.nickname}
-                    date={comment.date}
-                    title={comment.title}
-                    contentText={comment.contentText}
-                    img={comment.img}
-                  />
-                </React.Fragment>
-              </LikeComment>
-            );
-          })}
+          .map((comment, index) => (
+            <LikeComment key={index}>
+              <React.Fragment>
+                <WriteLikeCommentCard
+                  nickname={comment.nickname}
+                  date={comment.date}
+                  title={comment.title}
+                  contentText={comment.contentText}
+                  img={comment.img}
+                />
+              </React.Fragment>
+            </LikeComment>
+          ))}
       </LikeCommentWrapper>
       <NextArrow
         currentIndex={CurrentIndex}
@@ -148,7 +146,7 @@ const LikeCommentWrapper = styled.div`
 `;
 const LikeCommentGradation = styled.div`
   position: absolute;
-  bottom:0;
+  bottom: 0;
   min-width: 51.5625rem;
   min-height: 19.875rem;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 90%);

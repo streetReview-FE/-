@@ -107,8 +107,8 @@ const MyComment = () => {
                 currentYearAndMonth;
 
             return (
-              <MyCommentWrapper>
-                <React.Fragment key={index}>
+              <MyCommentWrapper key={index}>
+                <React.Fragment>
                   {shouldDisplayYearAndMonth ? (
                     <YearAndMonth>{currentYearAndMonth}</YearAndMonth>
                   ) : (

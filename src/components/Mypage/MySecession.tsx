@@ -10,7 +10,7 @@ const MySecession = () => {
   return (
     <MyCommentContainer>
       <CommentContainer>
-        <SecessionIcon img={secesstionIcon} />
+        <SecessionIcon $img={secesstionIcon} />
         <SecessionCheck>
           <SecessionCheckInput
             type="checkbox"
@@ -23,7 +23,7 @@ const MySecession = () => {
             탈퇴하기 전에 확인해주세요
           </SecessionCheckInputLabel>
         </SecessionCheck>
-        <SecessCheckButton chk={secessionState}>탈퇴확인</SecessCheckButton>
+        <SecessCheckButton $chk={secessionState}>탈퇴확인</SecessCheckButton>
       </CommentContainer>
     </MyCommentContainer>
   );
@@ -35,11 +35,11 @@ const MyCommentContainer = styled.div`
   align-items: center;
   margin-top: 4.06rem;
 `;
-const SecessionIcon = styled.div<{ img: string }>`
+const SecessionIcon = styled.div<{ $img: string }>`
   width: 22.77306rem;
   height: 21.77388rem;
   border-radius: 0.3125rem;
-  background: ${(props) => `url(${props.img})`};
+  background: ${(props) => `url(${props.$img})`};
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -68,7 +68,7 @@ const SecessionCheckInputLabel = styled.label`
   font-size: 1.5rem;
   font-weight: 700;
 `;
-const SecessCheckButton = styled.div<{ chk: boolean }>`
+const SecessCheckButton = styled.div<{ $chk: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,7 +82,7 @@ const SecessCheckButton = styled.div<{ chk: boolean }>`
   width: 17.75rem;
   height: 3.375rem;
   border-radius: 0.3125rem;
-  background: ${(props) => (props.chk ? "#ff9a83" : "#F0780C")};
+  background: ${(props) => (props.$chk ? "#ff9a83" : "#F0780C")};
   box-shadow: 4px 4px 4px 0px #ae391e;
 `;
 
