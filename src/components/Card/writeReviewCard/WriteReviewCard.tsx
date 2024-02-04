@@ -51,7 +51,6 @@ export default WriteReviewCard;
     width: 14rem;
     height: 25rem;
     position: relative;
-    margin-left: 2%;
   `
   const ReviewCardImg = styled.img`
     width: 100%;
@@ -98,7 +97,6 @@ const ReviewCardTagWrapper = styled.div`
   color: white;
   font-size: 0.5rem;
   font-weight: 700;
-  // margin-top: ;
 `;
 
 const ReviewCardTagBox1 = styled.div`

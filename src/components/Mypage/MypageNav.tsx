@@ -52,35 +52,32 @@ const MyPageNav = ({ selectedIcon }: MypageSelectedIconProp ) => {
 
 export default MyPageNav;
 // 마이페이지 네비바
-const MyPageNavWrapper = styled.div`
-  min-width: 7rem;
-  max-width: 10rem;
-  width: 11%;
+const MyPageNavWrapper = styled.ul`
+  width: 8rem;
   height: 100%;
   background-color: rgba(239, 239, 239, 1);
   border-radius: 1.25rem 0 0 1.25rem;
   box-shadow: 0.3rem 0.3rem 0.3rem 0 rgba(0, 0, 0, 0.25);
   display: flex;
   justify-content: center;
-  padding: 5% 0 5% 0;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto;
+  padding: 5% 0;
   overflow: hidden;
 `
-const IconWrapper = styled.div`
+const IconWrapper = styled.li`
   display: flex;
   justify-content:space-between;
   flex-direction: column;
   align-items: center;
-  margin-top: 8vh;
+  margin: auto 0;
 `
 const IconImg = styled.img`
-  height: 3.78vh;
-  width: 3.78vh;
+  width: 1.75rem;
+  height: 1.75rem;
 `
-const IconSpan = styled.span`
-  margin-top: 1vh;
+const IconSpan = styled.label`
+  margin-top: 0.75rem;
   text-align: center;
   font-size: 0.75rem;
   font-weight: 700;
