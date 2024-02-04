@@ -6,7 +6,9 @@ const Colors = {
   logoColor: "rgb(39,9,73)",
   backgroundColor: "rgba(97, 97, 97, 0.60)",
   fontSelectColor: "rgba(239, 125, 22, 1)",
-  fontBasicGrayColor:"rgba(156, 156, 156, 1)"
+  fontBasicGrayColor: "rgba(156, 156, 156, 1)",
+  white: "rgba(255, 255, 255, 1)",
+  orange: "rgba(239, 125, 22, 1)",
 };
 
 export default Colors;

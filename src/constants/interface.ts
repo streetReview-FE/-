@@ -22,3 +22,10 @@ interface SetCoordinatesAction {
 }
 
 export type ActionTypes = setAddressAction | SetCoordinatesAction;
+
+export interface ArrowProps {
+  currentIndex: number;
+  maximumItems: number;
+  arrayLength?: number;
+  onHandler: () => void;
+}
