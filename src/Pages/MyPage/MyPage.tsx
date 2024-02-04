@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Container } from "../../components/Login/style";
 import MyPageNav from "../../components/Mypage/MypageNav";
 import MypgeSideTitle from "../../components/Mypage/MypgeSideTitle";
+import TopSideToggle from "../../components/TopSideToggle/TopSideToggle";
 import PagePath from "../../constants/PagePath";
 const MyPage = () => {
   const location = useLocation();
@@ -43,72 +44,62 @@ const MyPage = () => {
   return (
     // 마이페이지 고정화면
     <Container>
-      <MyPageWrapper>
-        {/* 마이페이지 네비바 */}
-        <MyPageNav selectedIcon={selectedIcon}/>
-        {/* 마이페이지 오른쪽 화면 */}
-        <ContainerContentWrapper>
-          {/* 마이페이지 화면 위치 상태 */}
-          <MypgeSideTitle selectedIconText={getButtonText(selectedIcon).buttonText}/>
-        {/* 마이페이지 화면 위치 타이틀 상태 */}
-          <ContentDivWrapper>
-            <span>TRIPVIEW  {getButtonText(selectedIcon).titleText}</span>
-            <Outlet />
-          </ContentDivWrapper>
-        </ContainerContentWrapper>
-      </MyPageWrapper>
+      <MyPageContainer>
+        {/* 토글 */}
+        <TopSideToggle />
+
+        <MyPageWrapper>
+          {/* 마이페이지 네비바 */}
+          <MyPageNav selectedIcon={selectedIcon} />
+
+          {/* 마이페이지 오른쪽 화면 */}
+          <ContainerContentWrapper>
+            {/* 마이페이지 화면 위치 상태 */}
+            <MypgeSideTitle selectedIconText={getButtonText(selectedIcon).buttonText} />
+
+            {/* 마이페이지 화면 위치 타이틀 상태 */}
+            <ContentDivWrapper>
+              <span>TRIPVIEW  {getButtonText(selectedIcon).titleText}</span>
+              <Outlet />
+            </ContentDivWrapper>
+          </ContainerContentWrapper>
+        </MyPageWrapper>
+      </MyPageContainer>
     </Container>
   );
 };
 
 export default MyPage;
- // 마이페이지 고정화면
-const MyPageWrapper = styled.div`
+const MyPageContainer = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   width: 100%;
   height: 100%;
+`
+// 마이페이지 고정화면
+const MyPageWrapper = styled.div`
+  display: flex;
+  width: 90%;
+  height: 82%;
   background-color: rgba(255, 255, 255, 1);
   border-radius: 1.25rem;
   box-shadow: 0rem 0.3rem 0.3rem 0rem rgba(0, 0, 0, 0.25);
   z-index: 50;
 `
 // 마이페이지 오른쪽 화면
-const ContainerContentWrapper = styled.div`
+const ContainerContentWrapper = styled.div`s
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
+  width:100%;
 `
-const TopTitleWrapper = styled.div`
-  margin-top: 6vh;
-  display: flex;
-  justify-content:flex-end;
-  align-items:center;
-  padding-right: 5%;
-`
-const TopTitleDiv = styled.div`
-  display: flex;
-  align-items:center;
-  justify-content:center;
-  width: 20vw;
-  max-width: 17.75rem;
-  max-heigh: 1.625rem;
-  height: 6vh;
-  border-radius: 0.3125rem;
-  background: #FAEFE6;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
-  color: #FF9A83;
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: 700;
-`
-
 // 마이페이지 화면 위치 타이틀 상태
 const ContentDivWrapper = styled.div`
+  margin-top: 3.81rem; 
   display: flex;
-  align-items:center;
+  align-items: center;
   flex-direction: column;
-  width: 100%;
   color: #F0780C;
   text-align: center;
   font-size: 1.75rem;
