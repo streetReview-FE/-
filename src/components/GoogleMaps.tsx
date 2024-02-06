@@ -63,7 +63,8 @@ useEffect(() => {
         <input type="text" id='address' value={address} onChange={e => dispatch(setAddress(e.target.value))}/>
         <button type='submit'>주소 검색</button>
       </form>
-      <div id='map' style={{height: '500px', width: '100%'}}> </div>
+      <div id='map' style={{height: '100vh', width: '100%'}}> </div>
+      {/* 전체화면을 위해서 100vh로 설정 */}
     </div>
   )
 
