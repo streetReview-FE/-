@@ -1,13 +1,12 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import GoogleMaps from './components/GoogleMaps';
-import MainPage from './Pages/MainPage';
-import Login from './components/Login/GoogleLogin';
-import RedirectionPage from './components/Login/redirectionPage';
+import MainPage from './Pages/MainPage/MainPage';
 import MyPage from './Pages/MyPage/MyPage';
-import MyReview from './components/Mypage/MyReview';
+import GoogleMaps from './components/GoogleMaps';
+import Login from './components/Login/GoogleLogin';
 import MyComment from './components/Mypage/MyComment';
 import MyLikeComment from './components/Mypage/MyLikeComment';
+import MyReview from './components/Mypage/MyReview';
 import MySecession from './components/Mypage/MySecession';
 const Router = () => {
   return (
