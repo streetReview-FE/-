@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import testEventBanner from "../../../assets/test-eventbanner.png";
-// import MainReviewCard from "../../Card/MainReviewCard/MainReviewCard";
 import type { GetPostListProps, Review, Coordinates } from "../../../constants/interface";
 import { reverseGeocode } from "../../../store/gecoding";
 import { getReviews } from "../../Posts/reviews";
 import GetPostList from "../../Posts/GetPosts";
-
-
+import MainReviewCard from "../../Card/MainReviewCard/MainReviewCard";
+import MainModal from "../MainModal/MainModal";
 const MainMappingReview = () => {
-  // const [reviewCardArray, setReviewCardArray] = useState<
-  //   {
-  //     title: string;
-  //     tag: string[];
-  //     date: string;
-  //   }[]
-  // >([]);
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(true);
+  const [reviewCardArray, setReviewCardArray] = useState<
+    {
+      title: string;
+      tag: string[];
+      date: string;
+    }[]
+  >([]);
   const [CurrentIndex, setCurrentIndex] = useState<number>(0);
   const [currentCoord, setCurrentCoord] = useState<Coordinates | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -95,6 +95,7 @@ const MainMappingReview = () => {
             <GetPostList coordinate={currentCoord} />
           )}
       </MainReviewContainer>
+      {isOpenModal && <MainModal />}
       {/* 이벤트 배너가 들어가는 곳 */}
       <MainReviewContentEventBanner src={testEventBanner} alt="testUser" />
     </MainReviewWrapper>
@@ -130,3 +131,4 @@ const MainReviewContentEventBanner = styled.img`
   object-fit: cover;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
+
