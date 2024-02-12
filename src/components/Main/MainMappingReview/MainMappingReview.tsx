@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import testEventBanner from "../../../assets/test-eventbanner.png";
 import MainReviewCard from "../../Card/MainReviewCard/MainReviewCard";
+
+import MainModal from "../MainModal/MainModal";
 const MainMappingReview = () => {
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(true);
   const [reviewCardArray, setReviewCardArray] = useState<
     {
       title: string;
@@ -67,6 +70,7 @@ const MainMappingReview = () => {
             />
           ))}
       </MainReviewContainer>
+      {isOpenModal && <MainModal />}
       {/* 이벤트 배너가 들어가는 곳 */}
       <MainReviewContentEventBanner src={testEventBanner} alt="testUser" />
     </MainReviewWrapper>
@@ -102,3 +106,4 @@ const MainReviewContentEventBanner = styled.img`
   object-fit: cover;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
+

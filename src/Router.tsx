@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainPage from "./Pages/MainPage/MainPage";
 import MyPage from "./Pages/MyPage/MyPage";
 import PostReviewPage from "./Pages/PostReviewPage/PostReviewPage";
-import RequestPlace from "./Pages/RequestPlace/RequestPlace";
+import RequestPlacePage from "./Pages/RequestPlacePage/RequestPlacePage";
 import GoogleMaps from "./components/GoogleMaps";
 import Login from "./components/Login/GoogleLogin";
 import MyComment from "./components/Mypage/MyComment";
@@ -32,7 +32,7 @@ const Router = () => {
             <Route path="likecomment" element={<MyLikeComment />} />
             <Route path="secession" element={<MySecession />} />
           </Route>
-          <Route path="/request" element={<RequestPlace />}>
+          <Route path="/request" element={<RequestPlacePage />}>
             <Route path="" element={<RequestStart />} />
             <Route path="place" element={<RequestMapping />} />
             <Route path="place/content" element={<RequestMappingContent />} />
