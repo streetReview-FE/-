@@ -9,6 +9,22 @@ const Colors = {
   fontBasicGrayColor: "rgba(156, 156, 156, 1)",
   white: "rgba(255, 255, 255, 1)",
   orange: "rgba(239, 125, 22, 1)",
+
+  // postReview;
+  post: {
+    SpanOrange: "rgba(239, 125, 22, 1)",
+    buttonColor: "rgba(255, 154, 131, 1)",
+    buttonShadow: "#ae391e",
+    backgroundColor: "rgba(249, 241, 241, 1)",
+    reviewImgBackgroundColor: "rgba(243, 243, 243, 1)",
+  },
+  request: {
+    SpanGray: "rgba(161, 161, 161, 1)",
+    buttonColor: "rgba(255, 154, 131, 1)",
+    buttonShadow: "#ae391e",
+    backgroundColor: "rgba(249, 241, 241, 1)",
+    borderSolid: "rgba(240, 120, 12, 1)",
+  },
 };
 
 export default Colors;
