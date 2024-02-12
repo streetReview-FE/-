@@ -4,7 +4,7 @@ const PagePath = {
   Requestpage: "/request",
 
   // 리뷰작성페이지
-  PostReview: "/postview",
+  PostReview: "/postReview",
   // mypage_path
     Mypage: "/mypage",
     MypageRivew: "/mypage/review", //내가 작성한 리뷰
