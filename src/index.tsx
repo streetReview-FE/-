@@ -6,6 +6,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import store from './store/store';
 import { Provider } from 'react-redux';
 import {GoogleOAuthProvider} from '@react-oauth/google';
+import { AuthenticationProvider } from './utils/AuthenticationContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,7 +17,9 @@ root.render(
     onScriptLoadError={() => console.log("fail")}
     onScriptLoadSuccess={() => console.log("success")}>
     <Provider store={store}>
+      <AuthenticationProvider>
       <App />
+      </AuthenticationProvider>
     </Provider>
   </GoogleOAuthProvider>
 );

@@ -1,3 +1,5 @@
+import { Action, AnyAction } from "@reduxjs/toolkit";
+
 export interface Coordinates {
   lat: number;
   lng: number;
@@ -11,21 +13,65 @@ export interface State {
 export const SET_ADDRESS = "SET_ADDRESS";
 export const SET_COORDINATES = "SET_COORDINATES";
 
-interface setAddressAction {
-  type: typeof SET_ADDRESS;
+interface setAddressAction extends Action<typeof SET_ADDRESS> {
   payload: string;
 }
 
-interface SetCoordinatesAction {
-  type: typeof SET_COORDINATES;
+interface SetCoordinatesAction extends Action<typeof SET_COORDINATES> {
   payload: Coordinates;
 }
 
-export type ActionTypes = setAddressAction | SetCoordinatesAction;
+export type ActionTypes = setAddressAction | SetCoordinatesAction | AnyAction;
 
 export interface ArrowProps {
   currentIndex: number;
   maximumItems: number;
   arrayLength?: number;
   onHandler: () => void;
+}
+
+export interface GetPostListProps {
+  coordinate: Coordinates;
+}
+
+export interface Review {
+  id: number;
+  nickname: string;
+  content: string;
+  likey: number;
+  updatedDate: string;
+  picture: string;
+}
+
+export interface AddressComponent {
+  long_name: string;
+  short_name: string;
+  types: string[];
+}
+
+export interface GeocodeResult {
+  status: string;
+  results: {
+    address_components: AddressComponent[];
+    formatted_address: string;
+    geometry: {
+      location: {
+        lat: number;
+        lng: number;
+      };
+      location_type: string;
+    };
+    place_id: string;
+    plus_code?: {
+      compound_code: string;
+      global_code: string;
+    };
+    types: string[];
+  }[];
+}
+
+export interface menuTypes {
+  label: string;
+  isSelected: boolean;
+  id: number;
 }

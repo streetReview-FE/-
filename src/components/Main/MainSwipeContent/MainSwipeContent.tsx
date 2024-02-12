@@ -4,6 +4,7 @@ import angle_double_small_left_orange from "../../../assets/Icons/angle_double_s
 import icon_select_arrow from "../../../assets/Icons/fi-rr-caret-down.svg";
 import icon_side_menu_bar_map from "../../../assets/Icons/icon_side_menu_bar_map.svg";
 import MainMappingReview from "../MainMappingReview/MainMappingReview";
+import { DropdownMenu } from "../../DropDown/dropdowm";
 const OPTIONS = [
   { value: "latest", name: "최신 순" },
   { value: "comment", name: "댓글 순" },
@@ -45,6 +46,7 @@ const MainSwipeContent: React.FC<MainSwipeContentProps> = ({
                   종로구 회현동
                 </SwipeMenuReviewMappingTitle>
                 {/* select필터 */}
+                {/* <DropdownMenu/> */}
                 <SwipeMenuReviewMappingFilter
                   value={sortBy}
                   onChange={handleChangeSortBy}

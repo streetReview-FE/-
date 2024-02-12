@@ -1,3 +1,4 @@
+import { Reducer } from "@reduxjs/toolkit";
 import {
   State,
   SET_ADDRESS,
@@ -10,7 +11,10 @@ const initialState: State = {
   coordinates: { lat: 37.5665, lng: 126.978 },
 };
 
-const MapReducer = (state = initialState, action: ActionTypes): State => {
+const MapReducer: Reducer<State, ActionTypes> = (
+  state = initialState,
+  action: ActionTypes
+): State => {
   switch (action.type) {
     case SET_ADDRESS:
       return { ...state, address: action.payload };

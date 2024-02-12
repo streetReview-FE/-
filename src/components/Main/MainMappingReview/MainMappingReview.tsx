@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import testEventBanner from "../../../assets/test-eventbanner.png";
+import type { GetPostListProps, Review, Coordinates } from "../../../constants/interface";
+import { reverseGeocode } from "../../../store/gecoding";
+import { getReviews } from "../../Posts/reviews";
+import GetPostList from "../../Posts/GetPosts";
 import MainReviewCard from "../../Card/MainReviewCard/MainReviewCard";
-
 import MainModal from "../MainModal/MainModal";
 const MainMappingReview = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(true);
@@ -14,61 +17,83 @@ const MainMappingReview = () => {
     }[]
   >([]);
   const [CurrentIndex, setCurrentIndex] = useState<number>(0);
+  const [currentCoord, setCurrentCoord] = useState<Coordinates | null>(null);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [address, setAddress] = useState<string>('');
+
   const Maximumitems = 3;
   useEffect(() => {
-    setReviewCardArray([
-      {
-        title: "한순자손칼국수",
-        tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
-        date: "20240105",
-      },
-      {
-        title: "한순자손칼국수",
-        tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
-        date: "20240105",
-      },
-      {
-        title: "한순자손칼국수",
-        tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
-        date: "20240105",
-      },
-      {
-        title: "두순자손칼국수",
-        tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
-        date: "20240105",
-      },
-      {
-        title: "두순자손칼국수",
-        tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
-        date: "20240105",
-      },
-      {
-        title: "두순자손칼국수",
-        tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
-        date: "20240105",
-      },
-      {
-        title: "세순자손칼국수",
-        tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
-        date: "20240105",
-      },
-      // 추가적인 리뷰 카드가 있다면 여기에 계속 추가
-    ]);
-  }, []);
+    const fetchCurrentLocation = () => {
+      if('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (postion) => {
+            setCurrentCoord({ lat:postion.coords.latitude, lng: postion.coords.longitude});
+          },
+            (error) => {
+              console.log('error: ',error);
+          }
+        ); 
+      } else {
+        console.error('위치정보 지원 안됨');
+      }
+    };
+    fetchCurrentLocation();
+  },[]);
+    // setReviewCardArray([
+    //   {
+    //     title: "한순자손칼국수",
+    //     tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
+    //     date: "20240105",
+    //   },
+    //   {
+    //     title: "한순자손칼국수",
+    //     tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
+    //     date: "20240105",
+    //   },
+    //   {
+    //     title: "한순자손칼국수",
+    //     tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
+    //     date: "20240105",
+    //   },
+    //   {
+    //     title: "두순자손칼국수",
+    //     tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
+    //     date: "20240105",
+    //   },
+    //   {
+    //     title: "두순자손칼국수",
+    //     tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
+    //     date: "20240105",
+    //   },
+    //   {
+    //     title: "두순자손칼국수",
+    //     tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
+    //     date: "20240105",
+    //   },
+    //   {
+    //     title: "세순자손칼국수",
+    //     tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
+    //     date: "20240105",
+    //   },
+    //   // 추가적인 리뷰 카드가 있다면 여기에 계속 추가
+    // ]);
 
   return (
     <MainReviewWrapper>
       <MainReviewContainer>
-        {reviewCardArray
+        {/* {reviews
           .slice(CurrentIndex, CurrentIndex + Maximumitems)
           .map((review, index) => (
-            <MainReviewCard
+            <GetPostList
               key={index}
-              title={review.title}
-              tag={review.tag}
-              date={review.date}
+              content={review.content}
+              likey={review.likey}
+              date={review.updatedDate}
             />
-          ))}
+          ))} */}
+          {currentCoord && (
+            <GetPostList coordinate={currentCoord} />
+          )}
       </MainReviewContainer>
       {isOpenModal && <MainModal />}
       {/* 이벤트 배너가 들어가는 곳 */}

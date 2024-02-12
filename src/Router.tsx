@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 import MainPage from "./Pages/MainPage/MainPage";
 import MyPage from "./Pages/MyPage/MyPage";
 import PostReviewPage from "./Pages/PostReviewPage/PostReviewPage";
@@ -17,6 +16,7 @@ import PostReviewText from "./components/PostReview/PostReviewText/PostReviewTex
 import RequestMapping from "./components/Request/RequestMapping/RequestMapping";
 import RequestMappingContent from "./components/Request/RequestMappingContent/RequestMappingContent";
 import RequestStart from "./components/Request/RequestStart/RequestStart";
+import { PrivateRoute } from './utils/PrivateRoute';
 const Router = () => {
   return (
     <>
@@ -26,24 +26,26 @@ const Router = () => {
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/google/auth" element={<Login />} />
-          <Route path="/mypage" element={<MyPage />}>
-            <Route path="review" element={<MyReview />} />
-            <Route path="mycomment" element={<MyComment />} />
-            <Route path="likecomment" element={<MyLikeComment />} />
-            <Route path="secession" element={<MySecession />} />
-          </Route>
-          <Route path="/request" element={<RequestPlacePage />}>
-            <Route path="" element={<RequestStart />} />
-            <Route path="place" element={<RequestMapping />} />
-            <Route path="place/content" element={<RequestMappingContent />} />
-          </Route>
-          <Route path="/postReview" element={<PostReviewPage />}>
-            <Route path="" element={<PostReviewText />} />
-            <Route path="potoChk" element={<PostReviewImgChk />} />
-            <Route path="poto" element={<PostReviewImg />} />
-            <Route path="check" element={<PostReviewCheck />} />
-          </Route>
+          <Route element = {<PrivateRoute/>}>
+            <Route path="/mypage" element={<MyPage />}>
+              <Route path="review" element={<MyReview />} />
+              <Route path="mycomment" element={<MyComment />} />
+              <Route path="likecomment" element={<MyLikeComment />} />
+              <Route path="secession" element={<MySecession />} />
+            </Route>
+            <Route path="/request" element={<RequestPlacePage />}>
+              <Route path="" element={<RequestStart />} />
+              <Route path="place" element={<RequestMapping />} />
+              <Route path="place/content" element={<RequestMappingContent />} />
+            </Route>
+            <Route path="/postReview" element={<PostReviewPage />}>
+              <Route path="" element={<PostReviewText />} />
+              <Route path="potoChk" element={<PostReviewImgChk />} />
+              <Route path="poto" element={<PostReviewImg />} />
+              <Route path="check" element={<PostReviewCheck />} />
+            </Route>
           {/* <Route path="*" element={<NotFound />} /> */}
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
