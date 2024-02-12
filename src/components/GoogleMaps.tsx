@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { State } from "../constants/interface";
-import { setCoordinates } from "../redux/actions";
+import { setCoordinates } from "../redux/Mapactions";
 
 declare var google: any;
 

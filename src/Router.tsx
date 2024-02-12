@@ -8,6 +8,7 @@ import MyComment from './components/Mypage/MyComment';
 import MyLikeComment from './components/Mypage/MyLikeComment';
 import MyReview from './components/Mypage/MyReview';
 import MySecession from './components/Mypage/MySecession';
+import { PrivateRoute } from './utils/PrivateRoute';
 const Router = () => {
   return (
     <>
@@ -17,11 +18,13 @@ const Router = () => {
         <Route path="/" element={<MainPage/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/google/auth" element={<Login/>}/>
-        <Route path="/mypage" element={<MyPage />}>
+        <Route element = {<PrivateRoute/>}>
+          <Route path="/mypage" element={<MyPage />}>
           <Route path="review" element={<MyReview/>} />
           <Route path="mycomment" element={<MyComment />} />
           <Route path="likecomment" element={<MyLikeComment />} />
           <Route path="secession" element={<MySecession />} />
+        </Route>
         </Route>
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
