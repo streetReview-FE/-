@@ -1,10 +1,12 @@
 import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../utils/AuthenticationContext";
+import { logout } from "../../store/auth/authAction";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { isAuthenticated,setIsAuthenticated } = useAuth();
+  const dispatch = useDispatch();
+  const accessToken = localStorage.getItem('token');
 
   const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
   const REDIRCT_URI = process.env.REACT_APP_GOOGLE_REDIRECT_URI;
@@ -14,13 +16,14 @@ const Login = () => {
   };
 
   const handleLogoutBtn = () => {
-    setIsAuthenticated(false);
+    localStorage.removeItem('token');
+    dispatch(logout());
     navigate('/');
   }
 
   return (
     <>
-      {isAuthenticated ? (
+      {accessToken ? (
         <button onClick={handleLogoutBtn}>Logout</button>
       ) : (
         <button onClick={hadleLoginBtn}>Google Login</button>
