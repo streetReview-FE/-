@@ -7,7 +7,13 @@ interface AuthContextType {
 
 const AuthenticationContext = createContext<AuthContextType | null>(null);
 
-export const useAuth = () => useContext(AuthenticationContext);
+export const useAuth = () =>{
+  const context = useContext(AuthenticationContext)
+  if(context === null) {
+    throw new Error('AuthenticationProvider error');
+  }
+  return context;
+};
 
 interface AuthenticationProviderProps {
   children: ReactNode;
@@ -15,6 +21,7 @@ interface AuthenticationProviderProps {
 
 export const AuthenticationProvider: React.FC<AuthenticationProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const value = {isAuthenticated, setIsAuthenticated};
 
   return (
     <AuthenticationContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
