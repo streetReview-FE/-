@@ -5,7 +5,7 @@ const accessToken = localStorage.getItem("accessToken");
 
 export const getReviews = async (coords: Coordinates): Promise<Review[]> => {
   try {
-    const response = await axios.get("/street/all/view", {
+    const response = await axios.get("/reviews/all", {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json;charset=utf-8",
