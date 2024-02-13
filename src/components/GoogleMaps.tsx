@@ -1,8 +1,8 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { State } from "../constants/interface";
+import { StoreState } from "../constants/interface";
 import { setCoordinates } from "../redux/Mapactions";
 
 declare var google: any;
@@ -11,7 +11,10 @@ const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 
 const GoogleMaps = () => {
   const dispatch = useDispatch();
-  const { address, coordinates } = useSelector((state: State) => state);
+  const [mapLoaded, setMapLoaded] = useState(false);
+  const { address, coordinates } = useSelector(
+    (state: StoreState) => state.map
+  );
 
   const searchAddressHandler = (event: React.FormEvent) => {
     event.preventDefault();
@@ -46,21 +49,62 @@ const GoogleMaps = () => {
         console.log(err);
       });
   };
+  useEffect(() => {
+    const googleMapsScriptId = "map";
+    if (!document.getElementById(googleMapsScriptId)) {
+      const script = document.createElement("script");
+      script.onload = () => {
+        setMapLoaded(true);
+        getCurrentLocation();
+      };
+    } else {
+      setMapLoaded(true);
+      getCurrentLocation();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
+    if (mapLoaded) {
+      loadMap();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [coordinates, mapLoaded]);
+
+  const loadMap = () => {
+    if (!window.google) {
+      console.error("구글 API가 안됩니다.");
+      return;
+    }
     const mapElement = document.getElementById("map");
     if (mapElement) {
-      const map = new google.maps.Map(mapElement as HTMLElement, {
+      const map = new window.google.maps.Map(mapElement, {
         center: coordinates,
-        zoom: 16,
+        zoom: 17,
       });
-      new google.maps.Marker({
+      new window.google.maps.Marker({
         position: coordinates,
         map: map,
       });
     }
-  }, [coordinates]);
-
+  };
+  const getCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const currentCoordinates = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          dispatch(setCoordinates(currentCoordinates));
+          loadMap();
+        },
+        () => {
+          console.error("현재 위치 정보 업데이트 에러");
+        }
+      );
+    }
+  };
   return (
     <GoogleMapsContainer>
       {/* <form onSubmit={searchAddressHandler}>
@@ -80,7 +124,7 @@ const GoogleMaps = () => {
   );
 };
 const GoogleMapsContainer = styled.div`
-  position:relative;
+  position: relative;
   z-index: 0;
   bottom: 0;
   width: 100%;
