@@ -45,7 +45,7 @@ const GetPostList: React.FC<GetPostListProps> = ({coordinate})=> {
       <h1>{address}</h1>
       <ul>
         {reviews.map((review) => (
-          <Link key={review.id} to={`/street/all/view`}>
+          <Link key={review.id} to={`/review/{detailReview.id}`}>
             <li>{review.content}</li>
             <li>{review.likey}</li>
             <li>{review.updatedDate}</li>

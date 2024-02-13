@@ -17,6 +17,7 @@ import RequestMapping from "./components/Request/RequestMapping/RequestMapping";
 import RequestMappingContent from "./components/Request/RequestMappingContent/RequestMappingContent";
 import RequestStart from "./components/Request/RequestStart/RequestStart";
 import { PrivateRoute } from './utils/PrivateRoute';
+import RedirectionPage from "./components/Login/redirectionPage";
 const Router = () => {
   return (
     <>
@@ -25,7 +26,7 @@ const Router = () => {
           <Route path="/googleMap" element={<GoogleMaps />} />
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/google/auth" element={<Login />} />
+          <Route path="/google/auth" element={<RedirectionPage />} />
           <Route element = {<PrivateRoute/>}>
             <Route path="/mypage" element={<MyPage />}>
               <Route path="review" element={<MyReview />} />
