@@ -5,10 +5,9 @@ import type { GetPostListProps, Review, Coordinates } from "../../../constants/i
 import { reverseGeocode } from "../../../store/gecoding";
 import { getReviews } from "../../Posts/reviews";
 import GetPostList from "../../Posts/GetPosts";
-import MainReviewCard from "../../Card/MainReviewCard/MainReviewCard";
 import MainModal from "../MainModal/MainModal";
 const MainMappingReview = () => {
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(true);
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [reviewCardArray, setReviewCardArray] = useState<
     {
       title: string;
