@@ -9,7 +9,12 @@ export interface State {
   address: string;
   coordinates: Coordinates;
 }
-
+export interface StoreState {
+  map: {
+    address: string;
+    coordinates: Coordinates;
+  };
+}
 export const SET_ADDRESS = "SET_ADDRESS";
 export const SET_COORDINATES = "SET_COORDINATES";
 
