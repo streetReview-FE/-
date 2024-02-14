@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import testEventBanner from "../../../assets/test-eventbanner.png";
-import type { GetPostListProps, Review, Coordinates } from "../../../constants/interface";
-import { reverseGeocode } from "../../../store/gecoding";
-import { getReviews } from "../../Posts/reviews";
-import GetPostList from "../../Posts/GetPosts";
+import type { Coordinates, Review } from "../../../constants/interface";
+// import { reverseGeocode } from "../../../store/gecoding";
+// import { getReviews } from "../../Posts/reviews";
+// import GetPostList from "../../Posts/GetPosts";
 import MainModal from "../MainModal/MainModal";
 const MainMappingReview = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
@@ -90,9 +90,9 @@ const MainMappingReview = () => {
               date={review.updatedDate}
             />
           ))} */}
-          {currentCoord && (
+          {/* {currentCoord && (
             <GetPostList coordinate={currentCoord} />
-          )}
+          )} */}
       </MainReviewContainer>
       {isOpenModal && <MainModal />}
       {/* 이벤트 배너가 들어가는 곳 */}

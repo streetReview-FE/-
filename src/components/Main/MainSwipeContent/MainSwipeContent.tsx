@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import angle_double_small_left_orange from "../../../assets/Icons/angle_double_small_left_orange.svg";
 import icon_select_arrow from "../../../assets/Icons/fi-rr-caret-down.svg";
 import icon_side_menu_bar_map from "../../../assets/Icons/icon_side_menu_bar_map.svg";
 import MainMappingReview from "../MainMappingReview/MainMappingReview";
-import { DropdownMenu } from "../../DropDown/dropdowm";
+// import { DropdownMenu } from "../../DropDown/dropdowm";
+import { StoreState } from "../../../constants/interface";
+import { setAddress } from "../../../redux/Mapactions";
+import { reverseGeocode } from "../../../store/gecoding";
 const OPTIONS = [
   { value: "latest", name: "최신 순" },
   { value: "comment", name: "댓글 순" },
@@ -22,6 +26,25 @@ const MainSwipeContent: React.FC<MainSwipeContentProps> = ({
   const handleChangeSortBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortBy(e.target.value); // 선택한 옵션으로 상태 업데이트
   };
+
+  const dispatch = useDispatch();
+  const { address, coordinates } = useSelector(
+    (state: StoreState) => state.map
+  );
+  if (coordinates) {
+    reverseGeocode(coordinates)
+      .then((address: string | undefined) => {
+        if (address) {
+          dispatch(setAddress(address));
+        } else {
+          console.error("Address is undefined");
+        }
+      })
+      .catch((error: any) => {
+        console.error("Error while reverse geocoding:", error);
+      });
+  }
+
   return (
     //   세로 스와이프 화면
     <SwipeContainer>
@@ -39,14 +62,14 @@ const MainSwipeContent: React.FC<MainSwipeContentProps> = ({
                 alt="검색창"
               />
             </SwipeMenuSearchBarWrapper>
-
             <SwipeMenuReviewWrapper>
               <SwipeMenuReviewMappingWrapper>
                 <SwipeMenuReviewMappingTitle>
-                  종로구 회현동
+                  {address}
                 </SwipeMenuReviewMappingTitle>
                 {/* select필터 */}
                 {/* <DropdownMenu/> */}
+                {/* 여기가 정렬 */}
                 <SwipeMenuReviewMappingFilter
                   value={sortBy}
                   onChange={handleChangeSortBy}
