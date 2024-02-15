@@ -140,7 +140,7 @@ const GoogleMaps = () => {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
-          dispatch(setCoordinates(currentCoordinates));
+          dispatch(setCoordinates(currentCoordinates));          
           loadMap();
         },
         () => {

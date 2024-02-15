@@ -1,8 +1,10 @@
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import type { GetPostListProps, Review } from "../../constants/interface";
-import React, { useEffect, useState } from "react";
 import { reverseGeocode } from "../../store/gecoding";
 import { getReviews } from "./reviews";
+import { RootState } from "../../store/rootReducer";
 
 const GetPostList: React.FC<GetPostListProps> = ({coordinate})=> {
   const [address, setAddress] = useState<string>('');
