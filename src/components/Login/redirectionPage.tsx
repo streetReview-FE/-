@@ -22,6 +22,7 @@ const RedirectionPage = () => {
         console.log("token : ", res.data.data.accessToken);
         localStorage.setItem('token', res.data.data.accessToken);
         dispatch(loginSuccess(res.data.data.accessToken));
+        console.log("redux loginSuccess : ", loginSuccess);
         navigate("/");
       }else {
         throw new Error("로그인 실패");

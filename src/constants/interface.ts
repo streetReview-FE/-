@@ -39,13 +39,17 @@ export interface GetPostListProps {
   coordinate: Coordinates;
 }
 
+export interface Tag {
+  value: string;
+}
+
 export interface Review {
-  id: number;
-  nickname: string;
-  content: string;
+  streetName: string;
+  streetAddress: string;
+  reviewCount: number;
   likey: number;
-  updatedDate: string;
-  picture: string;
+  tagsList: Tag[];
+  photoList: string[];
 }
 
 export interface AddressComponent {

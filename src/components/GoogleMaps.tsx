@@ -2,8 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { StoreState } from "../constants/interface";
+import { Coordinates, StoreState } from "../constants/interface";
 import { setCoordinates } from "../redux/Mapactions";
+import customIcon from "../assets/Icons/custom-marker.svg";
+import { serialize } from "v8";
 
 declare var google: any;
 
@@ -43,12 +45,14 @@ const GoogleMaps = () => {
         });
         new google.maps.Marker({ position: newCoordinates, map: map });
         dispatch(setCoordinates(newCoordinates));
+        StreetData(map);
       })
       .catch((err) => {
         alert(err.message);
         console.log(err);
       });
   };
+
   useEffect(() => {
     const googleMapsScriptId = "map";
     if (!document.getElementById(googleMapsScriptId)) {
@@ -86,8 +90,48 @@ const GoogleMaps = () => {
         position: coordinates,
         map: map,
       });
+      StreetData(map);
     }
   };
+
+  const StreetData = (map: google.maps.Map) => {
+    const accessToken = localStorage.getItem("token");
+    axios.post("street/all/view",{}, {
+      headers : {
+        "Authorization" : `Bearer ${accessToken}`
+      }
+    }).then((res) => {
+      const streetData = res.data.data;
+      streetData.forEach((street:any) => {
+        const streetLocation = {
+          lat : street.x,
+          lng : street.y,
+        };
+        
+        const marker = new window.google.maps.Marker({
+          position: streetLocation,
+          map : map,
+          icon : customIcon,
+          title : street.streetName,
+        });
+
+        const infoWindow = new window.google.maps.InfoWindow({
+          content : `<div><strong>${street.streetName}</strong></div>
+            <div>주소 : ${street.streetAddress}</div>
+            <div>리뷰수 : ${street.reviewCount}</div>
+            <div>좋아요 수 : ${street.likey}</div>
+          `
+        });
+
+        marker.addListener("click", () => {
+          infoWindow.open(map, marker);
+        });
+      })
+    }).catch((error) => {
+      console.log("Street data error : ",error);
+    })
+  }
+
   const getCurrentLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
