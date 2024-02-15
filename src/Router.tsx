@@ -27,7 +27,8 @@ const Router = () => {
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/google/auth" element={<RedirectionPage />} />
-          <Route element = {<PrivateRoute/>}>
+
+          <Route element={<PrivateRoute/>}>
             <Route path="/mypage" element={<MyPage />}>
               <Route path="review" element={<MyReview />} />
               <Route path="mycomment" element={<MyComment />} />
