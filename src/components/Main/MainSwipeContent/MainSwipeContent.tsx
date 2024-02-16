@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import angle_double_small_left_orange from "../../../assets/Icons/angle_double_small_left_orange.svg";
@@ -31,20 +31,24 @@ const MainSwipeContent: React.FC<MainSwipeContentProps> = ({
   const { address, coordinates } = useSelector(
     (state: StoreState) => state.map
   );
-  if (coordinates) {
-    reverseGeocode(coordinates)
-      .then((address: string | undefined) => {
+  useEffect(() => {
+    const performReverseGeocoding = async () => {
+      try {
+        const address = await reverseGeocode(coordinates);
         if (address) {
           dispatch(setAddress(address));
+          console.log(address);
         } else {
           console.error("Address is undefined");
         }
-      })
-      .catch((error: any) => {
+      } catch (error) {
         console.error("Error while reverse geocoding:", error);
-      });
-  }
-
+      }
+    };
+    // 좌표값이 변경될 때마다 역지오코딩을 수행
+    performReverseGeocoding();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [coordinates]);
   return (
     //   세로 스와이프 화면
     <SwipeContainer>
