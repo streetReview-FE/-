@@ -7,6 +7,7 @@ import type { Coordinates, Review } from "../../../constants/interface";
 //import GetPostList from "../../Posts/GetPosts";
 import MainModal from "../MainModal/MainModal";
 import GetPostList from "../../Posts/GetPosts";
+import GetPostNearList from "../../Posts/GetPostsNear";
 
 const MainMappingReview = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
@@ -14,6 +15,7 @@ const MainMappingReview = () => {
   const [currentCoord, setCurrentCoord] = useState<Coordinates | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [address, setAddress] = useState<string>('');
+  const [viewMode, setViewMode] = useState('nearby'); 
 
   const Maximumitems = 3;
   useEffect(() => {
@@ -37,8 +39,11 @@ const MainMappingReview = () => {
   return (
     <MainReviewWrapper>
       <MainReviewContainer>
-          {currentCoord && (
+          {currentCoord && viewMode === 'selected' && (
             <GetPostList coordinate={currentCoord} reviews={reviews} />
+          )}
+          {currentCoord && viewMode === 'nearby' &&(
+            <GetPostNearList coordinate={currentCoord} reviews={reviews}/>
           )}
       </MainReviewContainer>
       {isOpenModal && <MainModal />}

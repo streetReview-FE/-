@@ -3,19 +3,20 @@ import axios from "axios";
 
 const accessToken = localStorage.getItem("token");
 
-export const getReviews = async (coords: Coordinates): Promise<Review[]> => {
+export const getnearReviews = async (
+  coords: Coordinates
+): Promise<Review[]> => {
   const getData = {
-    x: coords.lat,
-    y: coords.lng,
+    myX: coords.lat,
+    myY: coords.lng,
   };
   console.log(getData);
   try {
-    const response = await axios.get("/reviews/all", {
+    const response = await axios.post("/street/near/view", getData, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
-      params: getData,
     });
     console.log(response);
     if (
