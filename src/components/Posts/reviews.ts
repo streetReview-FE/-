@@ -16,8 +16,19 @@ export const getReviews = async (coords: Coordinates): Promise<Review[]> => {
       },
       params: getData,
     });
-    const reviewsArray = Object.values(response.data.data) as Review[];
-    return reviewsArray;
+    // if (response.data.data && typeof response.data.data === "object") {
+    //   const reviewsArray = Object.values(response.data.data) as Review[];
+    //   return reviewsArray;
+    // } else {
+    //   console.error("res.data.data is not an object", response.data);
+    //   return [];
+    //}
+    if (Array.isArray(response.data)) {
+      return response.data as Review[];
+    } else {
+      console.error("res.data is not an array", response.data);
+      return [];
+    }
   } catch (error) {
     console.log(`Error fetching reviews:`);
     throw error;

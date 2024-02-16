@@ -2,10 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { Coordinates, StoreState } from "../constants/interface";
+import { Coordinates, Review, StoreState } from "../constants/interface";
 import { setCoordinates } from "../redux/Mapactions";
 import customIcon from "../assets/Icons/custom-marker.svg";
 import { serialize } from "v8";
+import { getReviews } from "./Posts/reviews";
 
 declare var google: any;
 
@@ -17,6 +18,9 @@ const GoogleMaps = () => {
   const { address, coordinates } = useSelector(
     (state: StoreState) => state.map
   );
+  const [isMapInitialized, setIsMapInitialized] = useState(false);
+  const [selectedReviews, setSelectedReviews] = useState<Review[]>([]);
+  const[selectedCoords, setSelectedCoords] = useState<Coordinates | null>(null);
 
   const searchAddressHandler = (event: React.FormEvent) => {
     event.preventDefault();
@@ -69,11 +73,15 @@ const GoogleMaps = () => {
   }, []);
 
   useEffect(() => {
-    if (mapLoaded) {
+    if (mapLoaded && !isMapInitialized) {
       loadMap();
+      setIsMapInitialized(true);
+    // if(selectedCoords) {
+    //   getReviews(selectedCoords).then(setSelectedReviews).catch(console.error);
+    // }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [coordinates, mapLoaded]);
+  }, [mapLoaded]);
 
   const loadMap = () => {
     if (!window.google) {
@@ -90,7 +98,9 @@ const GoogleMaps = () => {
         position: coordinates,
         map: map,
       });
-      StreetData(map);
+      if(!isMapInitialized) {
+        StreetData(map);
+      }
     }
   };
 
@@ -115,6 +125,8 @@ const GoogleMaps = () => {
           title : street.streetName,
         });
 
+        marker.set('streetData', street);
+
         const infoWindow = new window.google.maps.InfoWindow({
           content : `<div><strong>${street.streetName}</strong></div>
             <div>주소 : ${street.streetAddress}</div>
@@ -123,8 +135,14 @@ const GoogleMaps = () => {
           `
         });
 
-        marker.addListener("click", () => {
+        marker.addListener("click",async() => {
           infoWindow.open(map, marker);
+          // setSelectedCoords({lat : street.x, lng : street.y});
+          const streetData = marker.get('streetData');
+          getReviews(streetData).then(reviews => {
+            setSelectedReviews(reviews);
+            setSelectedCoords({lat : street.x, lng : street.y});
+          })
         });
       })
     }).catch((error) => {

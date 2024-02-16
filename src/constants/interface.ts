@@ -37,6 +37,7 @@ export interface ArrowProps {
 
 export interface GetPostListProps {
   coordinate: Coordinates;
+  reviews: Review[];
 }
 
 export interface Tag {
