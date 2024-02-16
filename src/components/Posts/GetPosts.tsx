@@ -6,19 +6,20 @@ import { reverseGeocode } from "../../store/gecoding";
 import { getReviews } from "./reviews";
 import { RootState } from "../../store/rootReducer";
 
-const GetPostList: React.FC<GetPostListProps> = ({coordinate})=> {
+const GetPostList: React.FC<GetPostListProps> = ({coordinate, reviews})=> {
   const [address, setAddress] = useState<string>('');
-  const [reviews, setReviews] = useState<Review[]>([]);
 
   useEffect(() => {
+    let isMounted = true;
     const fetchData = async () => {
       try {
         const addr = await reverseGeocode(coordinate);
-        setAddress(addr ?? "");
-        const res = await getReviews(coordinate);
-        console.log(coordinate);
-        setReviews(res);
-        console.log(Array.isArray(res));
+        if(isMounted){
+          setAddress(addr ?? "");
+        }
+        // const res = await getReviews(coordinate);
+        // console.log(coordinate);
+        // console.log(Array.isArray(res));
       }catch (error) {
         console.log(error, coordinate);
       }
@@ -26,6 +27,9 @@ const GetPostList: React.FC<GetPostListProps> = ({coordinate})=> {
     if(coordinate) {
     fetchData();
     }
+    return () => {
+      isMounted = false;
+    };
   },[coordinate]);
 
   return (
