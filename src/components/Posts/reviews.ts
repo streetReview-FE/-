@@ -8,6 +8,7 @@ export const getReviews = async (coords: Coordinates): Promise<Review[]> => {
     x: coords.lat,
     y: coords.lng,
   };
+  console.log(getData);
   try {
     const response = await axios.get("/reviews/all", {
       headers: {
@@ -16,19 +17,20 @@ export const getReviews = async (coords: Coordinates): Promise<Review[]> => {
       },
       params: getData,
     });
-    // if (response.data.data && typeof response.data.data === "object") {
-    //   const reviewsArray = Object.values(response.data.data) as Review[];
-    //   return reviewsArray;
-    // } else {
-    //   console.error("res.data.data is not an object", response.data);
-    //   return [];
-    //}
-    if (Array.isArray(response.data)) {
-      return response.data as Review[];
+    console.log(response);
+    if (response.data.data && typeof response.data.data === "object") {
+      const reviewsArray = Object.values(response.data.data) as Review[];
+      return reviewsArray;
     } else {
-      console.error("res.data is not an array", response.data);
+      console.error("res.data.data is not an object", response.data);
       return [];
     }
+    // if (Array.isArray(response.data)) {
+    //   return response.data as Review[];
+    // } else {
+    //   console.error("res.data is not an array", response.data);
+    //   return [];
+    // }
   } catch (error) {
     console.log(`Error fetching reviews:`);
     throw error;

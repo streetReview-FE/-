@@ -64,7 +64,6 @@ const MainSwipeContent: React.FC<MainSwipeContentProps> = ({
                 {/* select필터 */}
                 {/* <DropdownMenu/> */}
               </SwipeMenuReviewMappingWrapper>
-              {/* 리뷰카드 들어가는 칸 MainMappingReview*/}
               <MainMappingReview />
             </SwipeMenuReviewWrapper>
           </SwipeMenuWrapper>
