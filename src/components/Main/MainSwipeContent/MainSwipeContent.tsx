@@ -1,19 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import angle_double_small_left_orange from "../../../assets/Icons/angle_double_small_left_orange.svg";
-import icon_select_arrow from "../../../assets/Icons/fi-rr-caret-down.svg";
 import icon_side_menu_bar_map from "../../../assets/Icons/icon_side_menu_bar_map.svg";
 import MainMappingReview from "../MainMappingReview/MainMappingReview";
 // import { DropdownMenu } from "../../DropDown/dropdowm";
 import { StoreState } from "../../../constants/interface";
 import { setAddress } from "../../../redux/Mapactions";
 import { reverseGeocode } from "../../../store/gecoding";
-const OPTIONS = [
-  { value: "latest", name: "최신 순" },
-  { value: "comment", name: "댓글 순" },
-  { value: "like", name: "좋아요 순" },
-];
+
 interface MainSwipeContentProps {
   isOpenSideBar: boolean;
   handleIsOpenSideBar: () => void;
@@ -22,11 +17,6 @@ const MainSwipeContent: React.FC<MainSwipeContentProps> = ({
   isOpenSideBar,
   handleIsOpenSideBar,
 }) => {
-  const [sortBy, setSortBy] = useState(OPTIONS[0].name); // 초기값을 최신순으로 설정
-  const handleChangeSortBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSortBy(e.target.value); // 선택한 옵션으로 상태 업데이트
-  };
-
   const dispatch = useDispatch();
   const { address, coordinates } = useSelector(
     (state: StoreState) => state.map
@@ -73,23 +63,8 @@ const MainSwipeContent: React.FC<MainSwipeContentProps> = ({
                 </SwipeMenuReviewMappingTitle>
                 {/* select필터 */}
                 {/* <DropdownMenu/> */}
-                {/* 여기가 정렬 */}
-                <SwipeMenuReviewMappingFilter
-                  value={sortBy}
-                  onChange={handleChangeSortBy}
-                >
-                  {OPTIONS.map((option) => (
-                    <SwipeMenuReviewMappingFilterOption
-                      key={option.value}
-                      value={option.value}
-                      defaultValue={option.value}
-                    >
-                      {option.name}
-                    </SwipeMenuReviewMappingFilterOption>
-                  ))}
-                </SwipeMenuReviewMappingFilter>
               </SwipeMenuReviewMappingWrapper>
-              {/* 리뷰카드 들어가는 칸 */}
+              {/* 리뷰카드 들어가는 칸 MainMappingReview*/}
               <MainMappingReview />
             </SwipeMenuReviewWrapper>
           </SwipeMenuWrapper>
@@ -185,40 +160,6 @@ const SwipeMenuReviewMappingTitle = styled.span`
   color: #000;
   font-size: 1.25rem;
   font-weight: 700;
-`;
-const SwipeMenuReviewMappingFilter = styled.select`
-  width: 5.3125rem;
-  height: 1.875rem;
-  border-radius: 0.3125rem;
-  border: 1px solid #e1dddb;
-  background: #fff;
-
-  color: #000;
-  font-size: 0.75rem;
-  font-weight: 600;
-  &:focus {
-    outline: none;
-  }
-  -webkit-appearance: none; /* WebKit 기반 브라우저에서 네이티브 스타일링 비활성화 */
-  -moz-appearance: none; /* Firefox 브라우저에서 네이티브 스타일링 비활성화 */
-  appearance: none; /* 네이티브 스타일링 비활성화 */
-  padding-left: 0.44rem;
-  background-image: url(${icon_select_arrow});
-  background-repeat: no-repeat; /* 이미지 반복 제거 */
-  background-position: right center; /* 화살표 위치 지정 */
-`;
-const SwipeMenuReviewMappingFilterOption = styled.option`
-  -webkit-appearance: none; /* WebKit 기반 브라우저에서 네이티브 스타일링 비활성화 */
-  -moz-appearance: none; /* Firefox 브라우저에서 네이티브 스타일링 비활성화 */
-  appearance: none; /* 네이티브 스타일링 비활성화 */
-  display: flex;
-  white-space: pre;
-  color: #000;
-  max-width: 5.3125rem;
-  max-height: 1.875rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  margin-top: 1.44rem;
 `;
 
 // 사이드창 동그라미
