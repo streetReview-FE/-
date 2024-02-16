@@ -126,7 +126,6 @@ const GoogleMaps = () => {
         });
 
         marker.set('streetData', street);
-
         const infoWindow = new window.google.maps.InfoWindow({
           content : `<div><strong>${street.streetName}</strong></div>
             <div>주소 : ${street.streetAddress}</div>
@@ -139,9 +138,14 @@ const GoogleMaps = () => {
           infoWindow.open(map, marker);
           // setSelectedCoords({lat : street.x, lng : street.y});
           const streetData = marker.get('streetData');
-          getReviews(streetData).then(reviews => {
+          const coords = {
+            lat: streetData.x,
+            lng : streetData.y
+          }
+          getReviews(coords).then(reviews => {
             setSelectedReviews(reviews);
-            setSelectedCoords({lat : street.x, lng : street.y});
+            setSelectedCoords(coords);
+            console.log(coords);
           })
         });
       })

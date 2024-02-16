@@ -4,21 +4,18 @@ import testEventBanner from "../../../assets/test-eventbanner.png";
 import type { Coordinates, Review } from "../../../constants/interface";
 // import { reverseGeocode } from "../../../store/gecoding";
 // import { getReviews } from "../../Posts/reviews";
-// import GetPostList from "../../Posts/GetPosts";
+//import GetPostList from "../../Posts/GetPosts";
 import MainModal from "../MainModal/MainModal";
+import GetPostList from "../../Posts/GetPosts";
+import GetPostNearList from "../../Posts/GetPostsNear";
+
 const MainMappingReview = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-  const [reviewCardArray, setReviewCardArray] = useState<
-    {
-      title: string;
-      tag: string[];
-      date: string;
-    }[]
-  >([]);
   const [CurrentIndex, setCurrentIndex] = useState<number>(0);
   const [currentCoord, setCurrentCoord] = useState<Coordinates | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [address, setAddress] = useState<string>('');
+  const [viewMode, setViewMode] = useState('nearby'); 
 
   const Maximumitems = 3;
   useEffect(() => {
@@ -38,61 +35,16 @@ const MainMappingReview = () => {
     };
     fetchCurrentLocation();
   },[]);
-    // setReviewCardArray([
-    //   {
-    //     title: "한순자손칼국수",
-    //     tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
-    //     date: "20240105",
-    //   },
-    //   {
-    //     title: "한순자손칼국수",
-    //     tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
-    //     date: "20240105",
-    //   },
-    //   {
-    //     title: "한순자손칼국수",
-    //     tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
-    //     date: "20240105",
-    //   },
-    //   {
-    //     title: "두순자손칼국수",
-    //     tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
-    //     date: "20240105",
-    //   },
-    //   {
-    //     title: "두순자손칼국수",
-    //     tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
-    //     date: "20240105",
-    //   },
-    //   {
-    //     title: "두순자손칼국수",
-    //     tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
-    //     date: "20240105",
-    //   },
-    //   {
-    //     title: "세순자손칼국수",
-    //     tag: ["#남대문시장", "#가성비맛집", "#숨은_맛집"],
-    //     date: "20240105",
-    //   },
-    //   // 추가적인 리뷰 카드가 있다면 여기에 계속 추가
-    // ]);
-
+  
   return (
     <MainReviewWrapper>
       <MainReviewContainer>
-        {/* {reviews
-          .slice(CurrentIndex, CurrentIndex + Maximumitems)
-          .map((review, index) => (
-            <GetPostList
-              key={index}
-              content={review.content}
-              likey={review.likey}
-              date={review.updatedDate}
-            />
-          ))} */}
-          {/* {currentCoord && (
-            <GetPostList coordinate={currentCoord} />
-          )} */}
+          {currentCoord && viewMode === 'selected' && (
+            <GetPostList coordinate={currentCoord} reviews={reviews} />
+          )}
+          {currentCoord && viewMode === 'nearby' &&(
+            <GetPostNearList coordinate={currentCoord} reviews={reviews}/>
+          )}
       </MainReviewContainer>
       {isOpenModal && <MainModal />}
       {/* 이벤트 배너가 들어가는 곳 */}

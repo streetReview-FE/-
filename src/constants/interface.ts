@@ -45,6 +45,7 @@ export interface Tag {
 }
 
 export interface Review {
+  id: number;
   streetName: string;
   streetAddress: string;
   reviewCount: number;
