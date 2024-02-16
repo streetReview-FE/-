@@ -1,6 +1,10 @@
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as Iconarrow } from "../../../assets/Icons/fi-sr-arrow-small-right.svg";
 import icon_side_menu_bar_map from "../../../assets/Icons/icon_side_menu_bar_map.svg";
+import { StoreState } from "../../../constants/interface";
+import { reverseGecodingDetail } from "../../../store/gecodingDetail";
 import { ArrowIcon, RequestContainer, RequestSpan } from "../stlyeRequest";
 import {
   RequestCheckSearchBar,
@@ -8,20 +12,50 @@ import {
   RequestCheckSearchBarWrapper,
 } from "./stlyeRequestMapping";
 const RequestMapping = () => {
+  const { coordinates } = useSelector((state: StoreState) => state.map);
+  const [postAddress, setPostAddress] = useState<String>();
   const navigate = useNavigate();
+  const handleStateNextPage = () => {
+    navigate("/request/place/content", {
+      state: {
+        x: coordinates.lat,
+        y: coordinates.lng,
+        postAddress: postAddress?.slice(4)
+      }
+    });
+  }
+  useEffect(() => {
+    const performReverseGeocoding = async () => {
+      try {
+        const address = await reverseGecodingDetail(coordinates);
+        if (address) {
+          console.log(address);
+          setPostAddress(address);
+        } else {
+          console.error("Address is undefined");
+        }
+      } catch (error) {
+        console.error("Error while reverse geocoding:", error);
+      }
+    };
+    // 좌표값이 변경될 때마다 역지오코딩을 수행
+    performReverseGeocoding();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [coordinates]);
   return (
     <RequestContainer>
       <RequestSpan>거리 위치 검색</RequestSpan>
       <RequestCheckSearchBarWrapper>
         <RequestCheckSearchBar
-          id="searchKetword"
+          id="streetAddress"
           type="text"
-          placeholder={"어디로 떠나볼까요?"}
+          placeholder={"현재 거리 등록하기"}
+          readOnly
         />
         <RequestCheckSearchBarImg src={icon_side_menu_bar_map} alt="검색창" />
       </RequestCheckSearchBarWrapper>
       <ArrowIcon
-        onClick={() => navigate(`/request/place/content`)}
+        onClick={handleStateNextPage}
         fill={"rgba(239, 125, 22, 1)"}
         as={Iconarrow}
       />

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as iconMainMenuGroup } from "../../../assets/Icons/icon_main_menu_group.svg";
 import IconLogin from "../../../assets/Icons/web_light_rd_SI.svg";
+import Login from "../../Login/GoogleLogin";
 import TopSideToggle from "../../TopSideToggle/TopSideToggle";
 
 const MainToggle = () => {
@@ -17,13 +18,15 @@ const MainToggle = () => {
   };
 
   const handleMenuClick = () => {
-    setClickMenu((prer) => !prer);
+    setClickMenu(prev => !prev);
+  };
+  useEffect(() => {
     if (accessToken) {
       setIsLogin(true);
     } else {
       setIsLogin(false);
     }
-  };
+  }, [accessToken]);
   return (
     //   오른쪽 끝 메뉴
     <MenuContainer>
@@ -46,7 +49,12 @@ const MainToggle = () => {
           />
         </MenuCircle2>
       )}
-      {clickMenu && isLogin && <TopSideToggle />}
+      {clickMenu && isLogin && (
+        <>
+          <Login />
+          <TopSideToggle />
+        </>
+      )}
     </MenuContainer>
   );
 };

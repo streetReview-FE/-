@@ -22,3 +22,21 @@ export const RequestSearchBar = styled.textarea`
   }
   border: none;
 `;
+export const InputForm = styled.form`
+  width: 44.875rem;
+  height: 19.875rem;
+  border-radius: 0.625rem;
+  background-color: ${Colors.request.backgroundColor};
+  padding: 1.56rem 1.75rem;
+
+  color: ${Colors.request.buttonColor};
+  font-size: 1.5rem;
+  font-weight: 700;
+  &::placeholder {
+    color: ${Colors.request.buttonColor};
+  }
+  &:focus {
+    outline: none;
+  }
+  border: none;
+`;
