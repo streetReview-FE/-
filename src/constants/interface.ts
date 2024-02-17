@@ -52,6 +52,8 @@ export interface Review {
   likey: number;
   tagsList: Tag[];
   photoList: string[];
+  x: number;
+  y: number;
 }
 
 export interface AddressComponent {
@@ -85,4 +87,12 @@ export interface menuTypes {
   label: string;
   isSelected: boolean;
   id: number;
+}
+
+export interface RequestStreet {
+  streetAddress: string;
+  streetName: string;
+  x: number;
+  y: number;
+  tagList: { value: string }[];
 }
