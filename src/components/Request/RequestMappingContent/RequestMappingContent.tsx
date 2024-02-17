@@ -2,9 +2,16 @@ import axios from "axios";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ReactComponent as Iconarrow } from "../../../assets/Icons/fi-sr-arrow-small-right.svg";
+import iconPlusBox from "../../../assets/Icons/icon_plusbox.svg";
+import iconXBox from "../../../assets/Icons/icon_xbox.svg";
+import { RequestStreet } from "../../../constants/interface";
 import { ArrowIcon, RequestContainer, RequestSpan } from "../stlyeRequest";
 import {
   InputForm,
+  InputFormInput,
+  InputFormInputContent,
+  InputFormInputContentTag,
+  InputFormSubmitButton,
   RequestCheckSearchBarWrapper,
 } from "./stlyeRequestMappingContent";
 const apiUrl = process.env.REACT_APP_BASE_URL;
@@ -19,13 +26,17 @@ const RequestMappingContent = () => {
   const { x, y, postAddress } = state; //타입 숫자로 명시
   const accessToken = localStorage.getItem("token");
   console.log(accessToken);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<RequestStreet>({
     streetAddress: postAddress,
     streetName: "",
     x: x,
     y: y,
     tagList: [{ value: "" }],
   });
+  const [isSubmitAllowed, setIsSubmitAllowed] = useState(false);
+  const [checkTitle, setCheckTitle] = useState(false);
+  const [checkTag, setCheckTag] = useState(false);
+
   const handleRequest = async () => {
     const config = {
       // withCredentials: true,
@@ -77,11 +88,30 @@ const RequestMappingContent = () => {
       tagList: [...formData.tagList, { value: "" }],
     });
   };
+  const checkPost = () => {
+    const filteredTitle = formData.streetName.trim();
+    const filteredTagList = formData.tagList.filter(
+      (tag) => tag.value.trim() !== ""
+    );
 
+    setCheckTitle(filteredTitle.length > 0);
+    setCheckTag(filteredTagList.length > 0);
+
+    if (!(filteredTitle.length > 0)) {
+      alert("거리이름을 입력해주세요.");
+    }
+    if (!(filteredTagList.length > 0)) {
+      alert("태그를 1개이상 입력해주세요.");
+    }
+  };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // 여기서 폼 데이터를 처리하거나 전송합니다.
-    console.log(formData);
+    // 유효성 검사 실행
+    checkPost();
+    if (checkTitle && checkTag) {
+      console.log("제출 데이터", formData);
+      handleRequest();
+    }
   };
   const navigate = useNavigate();
   return (
@@ -93,35 +123,41 @@ const RequestMappingContent = () => {
           placeholder={"어디로 떠나볼까요?"}
         /> */}
         <InputForm onSubmit={handleSubmit}>
-          <div>
-            <input
+          <InputFormInputContent>
+            <label>거리 이름을 알려주세요!</label>
+            <InputFormInput
               type="text"
               id="streetName"
               name="streetName"
               value={formData.streetName}
-              placeholder={"거리 이름을 알려주세요!"}
+              placeholder={"거리 이름"}
               onChange={handleChange}
             />
-          </div>
-          <div>
+          </InputFormInputContent>
+          <InputFormInputContent>
             <label>태그를 등록해주세요!(최대3개)</label>
             {formData.tagList.map((tag, index) => (
-              <div key={index}>
-                <input
+              <InputFormInputContentTag key={index}>
+                <InputFormInput
                   type="text"
                   value={tag.value}
                   onChange={(e) => handleTagChange(e, index)}
                 />
-                <button type="button" onClick={() => handleTagRemove(index)}>
-                  X
-                </button>
-              </div>
+                {formData.tagList.length > 1 && (
+                  <img
+                    src={iconXBox}
+                    alt="X"
+                    onClick={() => handleTagRemove(index)}
+                  />
+                )}
+              </InputFormInputContentTag>
             ))}
-            <button type="button" onClick={handleTagAdd}>
-              +
-            </button>
-          </div>
-          <button type="submit">Submit</button>
+            <div style={{ marginTop: "1rem" }} />
+            {formData.tagList.length < 3 && (
+              <img src={iconPlusBox} alt="+" onClick={handleTagAdd} />
+            )}
+          </InputFormInputContent>
+          <InputFormSubmitButton type="submit">Submit</InputFormSubmitButton>
         </InputForm>
       </RequestCheckSearchBarWrapper>
       <ArrowIcon

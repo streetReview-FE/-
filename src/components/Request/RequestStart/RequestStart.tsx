@@ -29,6 +29,7 @@ const RequestStart = () => {
         navigate("/");
       }
     } catch (error) {
+      // 에러처리
       if (axios.isAxiosError(error)) {
         const err = error.response?.data.code;
         if (err === 400) {
