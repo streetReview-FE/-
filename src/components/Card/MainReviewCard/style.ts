@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Colors from "../../../Styles/Colors";
 
 export const CardWrapper = styled.div`
   white-space: nowrap;
@@ -6,8 +7,11 @@ export const CardWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 26.5rem;
-  height: 17.3125rem;
+  // height: 20.3125rem;
+  height:auto;
   margin-bottom: 1.94rem;
+  background-color: ${Colors.request.backgroundColor};
+  border-radius: 0.625rem;
   position: relative;
 `;
 export const CardReviewer = styled.div`
@@ -38,10 +42,16 @@ export const CardImg = styled.img`
   width: 26.5rem;
   height: 13.5rem;
   object-fit: cover;
+  margin-top: 0.8rem;
   border-radius: 1.625rem;
+`;
+export const CardImgNone = styled.div`
+  width: 26.5rem;
+  margin-top: 0.8rem;
 `;
 export const MainWrapper = styled.div`
   margin-top: 0.69rem;
+  margin-bottom: 0.4rem;
   margin-left: 0.75rem;
   padding-right: 0.75rem;
   display: flex;
@@ -105,7 +115,6 @@ export const BottomDiv = styled.div`
 
 export const TagWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
   width: 100%;
   color: white;
   font-size: 0.75rem;
