@@ -33,7 +33,6 @@ const RequestMappingContent = () => {
     y: y,
     tagList: [{ value: "" }],
   });
-  const [isSubmitAllowed, setIsSubmitAllowed] = useState(false);
   const [checkTitle, setCheckTitle] = useState(false);
   const [checkTag, setCheckTag] = useState(false);
 

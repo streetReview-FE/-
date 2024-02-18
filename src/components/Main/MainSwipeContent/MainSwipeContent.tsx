@@ -97,7 +97,6 @@ const SwipeWrapper = styled.div<{ $isOpen: boolean }>`
   justify-content: center;
   height: 60.5rem;
   width: ${({ $isOpen }) => ($isOpen ? `31.92rem` : `3.06rem`)};
-  background-color: gray;
   border-radius: 0rem 1.25rem 1.25rem 0rem;
   background: #fff;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
