@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MainPage from "./Pages/MainPage/MainPage";
+import MMainPage from "./Pages/MainPage/M_MainPage";
 import MyPage from "./Pages/MyPage/MyPage";
 import PostReviewPage from "./Pages/PostReviewPage/PostReviewPage";
 import RequestPlacePage from "./Pages/RequestPlacePage/RequestPlacePage";
@@ -19,13 +19,13 @@ import RequestMapping from "./components/Request/RequestMapping/RequestMapping";
 import RequestMappingContent from "./components/Request/RequestMappingContent/RequestMappingContent";
 import RequestStart from "./components/Request/RequestStart/RequestStart";
 import { PrivateRoute } from './utils/PrivateRoute';
-const Router = () => {
+const MobileRouter = () => {
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/googleMap" element={<GoogleMaps />} />
-          <Route path="/" element={<MainPage />} />
+          <Route path="/" element={<MMainPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/google/auth" element={<RedirectionPage />} />
 
@@ -50,7 +50,6 @@ const Router = () => {
               <Route path="poto" element={<PostReviewImg />} />
               <Route path="check" element={<PostReviewCheck />} />
             </Route>
-          {/* <Route path="*" element={<NotFound />} /> */}
           </Route>
         </Routes>
       </BrowserRouter>
@@ -58,4 +57,4 @@ const Router = () => {
   );
 };
 
-export default Router;
+export default MobileRouter;
