@@ -1,5 +1,5 @@
-import { Coordinates, Review } from "../../constants/interface";
 import axios from "axios";
+import { Coordinates, Review } from "../../constants/interface";
 
 const accessToken = localStorage.getItem("token");
 
@@ -17,7 +17,7 @@ export const getReviews = async (coords: Coordinates): Promise<Review[]> => {
       },
       params: getData,
     });
-    console.log(response);
+    console.log("리뷰목록",response);
     if (
       response.data.data &&
       Array.isArray(response.data.data) &&
