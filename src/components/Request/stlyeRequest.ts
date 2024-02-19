@@ -11,8 +11,7 @@ export const RequestContainer = styled.div`
 `;
 
 export const RequestSpan = styled.span`
-  color: #a1a1a1;
-  ${Colors.request.SpanGray};
+  color: ${Colors.request.SpanGray};
   text-align: center;
   font-size: 1.5rem;
   font-weight: 700;

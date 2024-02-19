@@ -1,26 +1,21 @@
 import axios from "axios";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ReactComponent as Iconarrow } from "../../../assets/Icons/fi-sr-arrow-small-right.svg";
-import iconPlusBox from "../../../assets/Icons/icon_plusbox.svg";
-import iconXBox from "../../../assets/Icons/icon_xbox.svg";
-import { RequestStreet } from "../../../constants/interface";
-import { ArrowIcon, RequestContainer, RequestSpan } from "../stlyeRequest";
+import iconPlusBox from "../../../../assets/Icons/icon_plusbox.svg";
+import iconXBox from "../../../../assets/Icons/icon_xbox.svg";
+import { RequestStreet } from "../../../../constants/interface";
 import {
-  InputForm,
-  InputFormInput,
-  InputFormInputContent,
-  InputFormInputContentTag,
-  InputFormSubmitButton,
-  RequestCheckSearchBarWrapper,
-} from "./stlyeRequestMappingContent";
+    RequestContainer,
+    RequestSpan,
+} from "../../RequestStart/M_RequestStart/M_stlyeRequestStart";
+import * as M from "./M_styleRequestMappingContent";
 const apiUrl = process.env.REACT_APP_BASE_URL;
 interface LocationState {
   x: number;
   y: number;
   postAddress: string;
 }
-const RequestMappingContent = () => {
+const M_RequestMappingContent = () => {
   const location = useLocation();
   const state = location.state as LocationState;
   const { x, y, postAddress } = state; //타입 숫자로 명시
@@ -116,15 +111,11 @@ const RequestMappingContent = () => {
   return (
     <RequestContainer>
       <RequestSpan>거리 위치 검색</RequestSpan>
-      <RequestCheckSearchBarWrapper>
-        {/* <RequestSearchBar
-          id="streetAddress"
-          placeholder={"어디로 떠나볼까요?"}
-        /> */}
-        <InputForm onSubmit={handleSubmit}>
-          <InputFormInputContent>
+      <M.RequestCheckSearchBarWrapper>
+        <M.InputForm onSubmit={handleSubmit}>
+          <M.InputFormInputContent>
             <label>거리 이름을 알려주세요!</label>
-            <InputFormInput
+            <M.InputFormInput
               type="text"
               id="streetName"
               name="streetName"
@@ -132,12 +123,12 @@ const RequestMappingContent = () => {
               placeholder={"거리 이름"}
               onChange={handleChange}
             />
-          </InputFormInputContent>
-          <InputFormInputContent>
+          </M.InputFormInputContent>
+          <M.InputFormInputContent>
             <label>태그를 등록해주세요!(최대3개)</label>
             {formData.tagList.map((tag, index) => (
-              <InputFormInputContentTag key={index}>
-                <InputFormInput
+              <M.InputFormInputContentTag key={index}>
+                <M.InputFormInput
                   type="text"
                   value={tag.value}
                   onChange={(e) => handleTagChange(e, index)}
@@ -149,23 +140,18 @@ const RequestMappingContent = () => {
                     onClick={() => handleTagRemove(index)}
                   />
                 )}
-              </InputFormInputContentTag>
+              </M.InputFormInputContentTag>
             ))}
             <div style={{ marginTop: "1rem" }} />
             {formData.tagList.length < 3 && (
               <img src={iconPlusBox} alt="+" onClick={handleTagAdd} />
             )}
-          </InputFormInputContent>
-          <InputFormSubmitButton type="submit">등록하기</InputFormSubmitButton>
-        </InputForm>
-      </RequestCheckSearchBarWrapper>
-      <ArrowIcon
-        onClick={() => navigate(`/request/place`)}
-        fill={"rgba(239, 125, 22, 1)"}
-        as={Iconarrow}
-      />
+          </M.InputFormInputContent>
+          <M.InputFormSubmitButton type="submit">등록하기</M.InputFormSubmitButton>
+        </M.InputForm>
+      </M.RequestCheckSearchBarWrapper>
     </RequestContainer>
   );
 };
 
-export default RequestMappingContent;
+export default M_RequestMappingContent;
