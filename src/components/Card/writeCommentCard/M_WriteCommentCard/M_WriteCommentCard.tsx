@@ -1,42 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-import { ReactComponent as Iconarrow } from "../../../assets/Icons/fi-sr-arrow-small-right.svg";
-import test_userimg from "../../../assets/test-userimg.svg";
+import test_userimg from "../../../../assets/test-userimg.svg";
 interface MyCommentCardProps {
   date: string;
-  title: string;
   contentText: string;
   img: string;
   index: number;
 }
-type MycommentIconProp = {
-  path: string;
-  index: number;
-  img: React.FunctionComponent<
-    React.SVGProps<SVGSVGElement> & {
-      title?: string | undefined;
-    }
-  >;
-};
-const WriteCommentCard: React.FC<MyCommentCardProps> = ({
+const M_WriteCommentCard: React.FC<MyCommentCardProps> = ({
   date,
-  title,
   contentText,
   img,
   index,
 }) => {
-  const MypageNavIcon = ({ path, index, img }: MycommentIconProp) => {
-    return (
-      <IconImg
-        as={img}
-        fill={
-          index % 2 === 0 ? "rgba(76, 185, 231, 1)" : "rgba(156, 156, 156, 1)"
-        }
-      />
-    );
-  };
   const content =
-    contentText.length > 25 ? <>{contentText.slice(0, 25)}...</> : contentText;
+    contentText.length > 15 ? <>{contentText.slice(0, 15)}...</> : contentText;
   return (
     <MyCommentBox>
       <MyCommentDateWrapper>
@@ -51,14 +29,10 @@ const WriteCommentCard: React.FC<MyCommentCardProps> = ({
         {/* 내코멘트 */}
         <MyCommentContent>
           <EventUserImg src={test_userimg} alt="testUserImg" />
-          <div style={{ flexDirection: "column" }}>
-            <EventTitle>#{title}</EventTitle>
-            <EventContentText>{content}</EventContentText>
-          </div>
+          <EventContentText>{content}</EventContentText>
           <EventImg $img={img} />
         </MyCommentContent>
       </MyCommentContentWrapper>
-      <MypageNavIcon path={""} index={index} img={Iconarrow} />
     </MyCommentBox>
   );
 };
@@ -66,35 +40,34 @@ const WriteCommentCard: React.FC<MyCommentCardProps> = ({
 const MyCommentBox = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 3.63rem;
+  margin-bottom: 2rem;
 `;
 const MyCommentDateWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 4.5625rem;
-  height: 4.5625rem;
+  width: 2rem;
+  height: 2rem;
   border-radius: 0.625rem;
   background: #f0780c;
-  margin-left: 1.94rem;
-  margin-right: 6.13rem;
+  margin-right: 0.38rem;
 `;
 
 const MyCommentDate = styled.div`
-  width: 2.875rem;
-  height: 2.375rem;
   color: #fff;
-  font-size: 2.25rem;
-  font-weight: 600;
+  font-size: 1.375rem;
+  font-weight: 700;
   line-height: 100%; /* 2.25rem */
 `;
 const MyCommentContentWrapper = styled.div<{ $isOdd: number }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 27.375rem;
-  height: 4.5625rem;
+  width: 16.875rem;
+  height: 3.0625rem;
   border-radius: 1.25rem;
+  padding-left: 0.81rem;
+  padding-right: 0.41rem;
   background: ${(props) =>
     props.$isOdd % 2 === 0
       ? "rgba(171, 223, 241, 0.49)"
@@ -103,43 +76,32 @@ const MyCommentContentWrapper = styled.div<{ $isOdd: number }>`
 const MyCommentContent = styled.div`
   display: flex;
   align-items: center;
-  width: 25.93rem;
-  height: 3.0625rem;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 `;
 
 const EventUserImg = styled.img`
-  width: 3.5rem;
-  height: 3.0625rem;
+  width: 2.1875rem;
+  height: 2.1875rem;
   border-radius: 0.9375rem;
-  margin-right: 0.81rem;
-`;
-const EventTitle = styled.div`
-  display: flex;
-  color: var(--bluishgreen, #0c4a60);
-  text-align: center;
-  font-size: 0.75rem;
-  font-weight: 600;
+  margin-right: 0.5rem;
 `;
 const EventImg = styled.div<{ $img: string }>`
   display: flex;
   margin-left: auto;
-  width: 1.9375rem;
-  height: 1.9375rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 0.3125rem;
   background: ${(props) => `url(${props.$img})`};
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 `;
-const IconImg = styled.img`
-  width: 1.5rem;
-  height: 1.5rem;
-  margin-left: 1.88rem;
-`;
 const EventContentText = styled.div`
   color: #000;
-  font-size: 0.9375rem;
+  font-size: 0.6875rem;
   font-weight: 700;
 `;
 
-export default WriteCommentCard;
+export default M_WriteCommentCard;
