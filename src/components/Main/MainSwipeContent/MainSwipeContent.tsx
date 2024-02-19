@@ -100,6 +100,7 @@ const SwipeWrapper = styled.div<{ $isOpen: boolean }>`
   border-radius: 0rem 1.25rem 1.25rem 0rem;
   background: #fff;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  transition: height 0.3s ease;
 `;
 
 // 사이드 창 열었을 때,

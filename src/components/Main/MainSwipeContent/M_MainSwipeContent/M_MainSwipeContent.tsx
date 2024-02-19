@@ -4,7 +4,7 @@ import angle_double_small_left_orange from "../../../../assets/Icons/angle_doubl
 import { StoreState } from "../../../../constants/interface";
 import { setAddress } from "../../../../redux/Mapactions";
 import { reverseGeocode } from "../../../../store/gecoding";
-import MainMappingReview from "../../MainMappingReview/MainMappingReview";
+import MMainMappingReview from "../../MainMappingReview/M_MainMappingReview.tsx/M_MainMappingReview";
 import * as M from "./M_stlyeM_MainSwipeContent";
 interface MainSwipeContentProps {
   isOpenSideBar: boolean;
@@ -57,12 +57,11 @@ const M_MainSwipeContent: React.FC<MainSwipeContentProps> = ({
                 {/* select필터 */}
                 {/* <DropdownMenu/> */}
               </M.SwipeMenuReviewMappingWrapper>
-              <MainMappingReview />
+              <MMainMappingReview />
             </M.SwipeMenuReviewWrapper>
           </M.SwipeMenuWrapper>
         )}
       </M.SwipeWrapper>
-      {/* 스와이프 화면 열었을 때 */}
     </M.SwipeContainer>
   );
 };

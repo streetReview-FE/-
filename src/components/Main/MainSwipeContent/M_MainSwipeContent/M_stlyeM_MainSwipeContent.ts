@@ -18,11 +18,12 @@ export const SwipeWrapper = styled.div<{ $isOpen: boolean }>`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: ${({ $isOpen }) => ($isOpen ? `80%` : `3rem;`)};
+  height: ${({ $isOpen }) => ($isOpen ? `75vh` : `3rem;`)};
   background-color: ${({ $isOpen }) =>
     $isOpen ? `${Colors.white};` : `${Colors.orange};`};
   border-radius: 1.25rem 1.25rem 0rem 0rem;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  transition: height 0.5s ease;
 `;
 
 // 사이드 창 열었을 때,

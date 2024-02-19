@@ -47,7 +47,33 @@ export const SearchBar = styled.input`
   }
 `;
 export const SearchBarImg = styled.img`
-  width: 1.24988rem;
-  height: 1.25rem;
+  width: 0.70313rem;
+  height: 0.70313rem;
   margin: 0 0.8rem;
+`;
+
+// 돋보기 토글
+export const SearchBarToggleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  z-index: 100;
+  overflow: hidden;
+`;
+
+export const MenuToggleCircle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.875rem;
+  height: 1.875rem;
+  background-color: ${Colors.white};
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+`;
+export const MenuToggleCircleImg = styled.img`
+  width: 0.70313rem;
+  height: 0.70313rem;
 `;
