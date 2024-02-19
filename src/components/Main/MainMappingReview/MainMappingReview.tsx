@@ -5,19 +5,16 @@ import type { Coordinates, Review } from "../../../constants/interface";
 // import { reverseGeocode } from "../../../store/gecoding";
 // import { getReviews } from "../../Posts/reviews";
 //import GetPostList from "../../Posts/GetPosts";
-import MainModal from "../MainModal/MainModal";
 import GetPostList from "../../Posts/GetPosts";
 import GetPostNearList from "../../Posts/GetPostsNear";
+import MainModal from "../MainModal/MainModal";
 
 const MainMappingReview = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-  const [CurrentIndex, setCurrentIndex] = useState<number>(0);
   const [currentCoord, setCurrentCoord] = useState<Coordinates | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
-  const [address, setAddress] = useState<string>('');
   const [viewMode, setViewMode] = useState('nearby'); 
 
-  const Maximumitems = 3;
   useEffect(() => {
     const fetchCurrentLocation = () => {
       if('geolocation' in navigator) {
