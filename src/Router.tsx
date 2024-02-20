@@ -3,8 +3,10 @@ import MainPage from "./Pages/MainPage/MainPage";
 import MyPage from "./Pages/MyPage/MyPage";
 import PostReviewPage from "./Pages/PostReviewPage/PostReviewPage";
 import RequestPlacePage from "./Pages/RequestPlacePage/RequestPlacePage";
+import StreetDetailPage from "./Pages/StreetDetailPage/StreetDetailPage";
 import GoogleMaps from "./components/GoogleMaps";
 import Login from "./components/Login/GoogleLogin";
+import RedirectionPage from "./components/Login/redirectionPage";
 import MyComment from "./components/Mypage/MyComment";
 import MyLikeComment from "./components/Mypage/MyLikeComment";
 import MyReview from "./components/Mypage/MyReview";
@@ -17,7 +19,6 @@ import RequestMapping from "./components/Request/RequestMapping/RequestMapping";
 import RequestMappingContent from "./components/Request/RequestMappingContent/RequestMappingContent";
 import RequestStart from "./components/Request/RequestStart/RequestStart";
 import { PrivateRoute } from './utils/PrivateRoute';
-import RedirectionPage from "./components/Login/redirectionPage";
 const Router = () => {
   return (
     <>
@@ -34,6 +35,9 @@ const Router = () => {
               <Route path="mycomment" element={<MyComment />} />
               <Route path="likecomment" element={<MyLikeComment />} />
               <Route path="secession" element={<MySecession />} />
+            </Route>
+            <Route path="/review" element={<StreetDetailPage />}>
+              <Route path=":id" element={<MySecession />} />
             </Route>
             <Route path="/request" element={<RequestPlacePage />}>
               <Route path="" element={<RequestStart />} />

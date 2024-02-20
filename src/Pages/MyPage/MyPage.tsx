@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import styled from "styled-components";
 import { Container } from "../../components/Login/style";
 import MyPageNav from "../../components/Mypage/MypageNav";
 import MypgeSideTitle from "../../components/Mypage/MypgeSideTitle";
 import TopSideToggle from "../../components/TopSideToggle/TopSideToggle";
 import PagePath from "../../constants/PagePath";
+import * as W from "./stlyeMyPage";
 const MyPage = () => {
   const location = useLocation();
   const [selectedIcon, setSelectedIcon] = useState(location.pathname);
@@ -44,64 +44,29 @@ const MyPage = () => {
   return (
     // 마이페이지 고정화면
     <Container>
-      <MyPageContainer>
+      <W.MyPageContainer>
         {/* 토글 */}
         <TopSideToggle />
 
-        <MyPageWrapper>
+        <W.MyPageWrapper>
           {/* 마이페이지 네비바 */}
           <MyPageNav selectedIcon={selectedIcon} />
 
           {/* 마이페이지 오른쪽 화면 */}
-          <ContainerContentWrapper>
+          <W.ContainerContentWrapper>
             {/* 마이페이지 화면 위치 상태 */}
             <MypgeSideTitle selectedIconText={getButtonText(selectedIcon).buttonText} />
 
             {/* 마이페이지 화면 위치 타이틀 상태 */}
-            <ContentDivWrapper>
+            <W.ContentDivWrapper>
               <span>TRIPVIEW  {getButtonText(selectedIcon).titleText}</span>
               <Outlet />
-            </ContentDivWrapper>
-          </ContainerContentWrapper>
-        </MyPageWrapper>
-      </MyPageContainer>
+            </W.ContentDivWrapper>
+          </W.ContainerContentWrapper>
+        </W.MyPageWrapper>
+      </W.MyPageContainer>
     </Container>
   );
 };
 
 export default MyPage;
-const MyPageContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-`
-// 마이페이지 고정화면
-const MyPageWrapper = styled.div`
-  display: flex;
-  width: 90%;
-  height: 82%;
-  background-color: rgba(255, 255, 255, 1);
-  border-radius: 1.25rem;
-  box-shadow: 0rem 0.3rem 0.3rem 0rem rgba(0, 0, 0, 0.25);
-  z-index: 50;
-`
-// 마이페이지 오른쪽 화면
-const ContainerContentWrapper = styled.div`s
-  display: flex;
-  flex-direction: column;
-  width:100%;
-`
-// 마이페이지 화면 위치 타이틀 상태
-const ContentDivWrapper = styled.div`
-  margin-top: 3.81rem; 
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  color: #F0780C;
-  text-align: center;
-  font-size: 1.75rem;
-  font-weight: 700;
-`

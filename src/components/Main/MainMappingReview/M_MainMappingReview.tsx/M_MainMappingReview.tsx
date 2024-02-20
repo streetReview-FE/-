@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import testEventBanner from "../../../assets/test-eventbanner.png";
-import type { Coordinates, Review } from "../../../constants/interface";
-// import { reverseGeocode } from "../../../store/gecoding";
-// import { getReviews } from "../../Posts/reviews";
-//import GetPostList from "../../Posts/GetPosts";
-import GetPostList from "../../Posts/GetPosts";
-import GetPostNearList from "../../Posts/GetPostsNear";
-import MainModal from "../MainModal/MainModal";
+import testEventBanner from "../../../../assets/test-eventbanner.png";
+import type { Coordinates, Review } from "../../../../constants/interface";
+import GetPostList from "../../../Posts/GetPosts";
+import GetPostNearList from "../../../Posts/GetPostsNear";
+import MainModal from "../../MainModal/MainModal";
 
-const MainMappingReview = () => {
+const M_MainMappingReview = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [currentCoord, setCurrentCoord] = useState<Coordinates | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -50,7 +47,7 @@ const MainMappingReview = () => {
   );
 };
 
-export default MainMappingReview;
+export default M_MainMappingReview;
 
 const MainReviewWrapper = styled.div`
   display: flex;
