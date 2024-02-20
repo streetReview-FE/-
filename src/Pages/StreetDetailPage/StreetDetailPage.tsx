@@ -1,8 +1,12 @@
+import { useState } from "react";
 import styled from "styled-components";
+import { StreetDetail } from "../../constants/interface";
+import useGetStreetDetail from "../../hooks/useGetStreetDetail";
 import StreetDetailComment from "./StreetDetailComment/StreetDetailComment";
 import StreetDetailReview from "./StreetDetailReview/StreetDetailReview";
-
 const StreetDetailPage = () => {
+  const [streetDetail, setStreetDetail] = useState<StreetDetail | null>(null);
+  const { getStreetDetail } = useGetStreetDetail();
   return (
     <ModalWrapper>
       <ModalContentWrapper>
