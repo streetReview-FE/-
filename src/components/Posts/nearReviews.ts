@@ -1,7 +1,8 @@
-import { Coordinates, Review } from "../../constants/interface";
 import axios from "axios";
+import { Coordinates, Review } from "../../constants/interface";
 
 const accessToken = localStorage.getItem("token");
+const apiUrl = process.env.REACT_APP_BASE_URL;
 
 export const getnearReviews = async (
   coords: Coordinates
@@ -12,7 +13,7 @@ export const getnearReviews = async (
   };
   console.log(getData);
   try {
-    const response = await axios.post("/street/near/view", getData, {
+    const response = await axios.post(`${apiUrl}/street/near/view`, getData, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
