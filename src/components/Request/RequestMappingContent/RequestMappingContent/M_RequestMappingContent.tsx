@@ -1,15 +1,14 @@
-import axios from "axios";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import iconPlusBox from "../../../../assets/Icons/icon_plusbox.svg";
 import iconXBox from "../../../../assets/Icons/icon_xbox.svg";
 import { RequestStreet } from "../../../../constants/interface";
+import usePostStreet from "../../../../hooks/usePostStreet";
 import {
-    RequestContainer,
-    RequestSpan,
+  RequestContainer,
+  RequestSpan,
 } from "../../RequestStart/M_RequestStart/M_stlyeRequestStart";
 import * as M from "./M_styleRequestMappingContent";
-const apiUrl = process.env.REACT_APP_BASE_URL;
 interface LocationState {
   x: number;
   y: number;
@@ -19,8 +18,8 @@ const M_RequestMappingContent = () => {
   const location = useLocation();
   const state = location.state as LocationState;
   const { x, y, postAddress } = state; //타입 숫자로 명시
-  const accessToken = localStorage.getItem("token");
-  console.log(accessToken);
+  const { postStreet } = usePostStreet();
+
   const [formData, setFormData] = useState<RequestStreet>({
     streetAddress: postAddress,
     streetName: "",
@@ -30,30 +29,8 @@ const M_RequestMappingContent = () => {
   });
   const [checkTitle, setCheckTitle] = useState(false);
   const [checkTag, setCheckTag] = useState(false);
-
-  const handleRequest = async () => {
-    const config = {
-      // withCredentials: true,
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-    try {
-      const res = await axios.post(
-        `${apiUrl}/street/registration`,
-        formData,
-        config
-      );
-      console.log(res);
-      if (res.status === 200) {
-        navigate("/");
-      } else {
-        throw new Error("거리요청 실패");
-      }
-    } catch (error) {
-      console.log("error : ", error);
-      navigate("/");
-    }
+  const handleRequest = () => {
+    postStreet(formData);
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -107,7 +84,6 @@ const M_RequestMappingContent = () => {
       handleRequest();
     }
   };
-  const navigate = useNavigate();
   return (
     <RequestContainer>
       <RequestSpan>거리 위치 검색</RequestSpan>
@@ -147,7 +123,9 @@ const M_RequestMappingContent = () => {
               <img src={iconPlusBox} alt="+" onClick={handleTagAdd} />
             )}
           </M.InputFormInputContent>
-          <M.InputFormSubmitButton type="submit">등록하기</M.InputFormSubmitButton>
+          <M.InputFormSubmitButton type="submit">
+            등록하기
+          </M.InputFormSubmitButton>
         </M.InputForm>
       </M.RequestCheckSearchBarWrapper>
     </RequestContainer>

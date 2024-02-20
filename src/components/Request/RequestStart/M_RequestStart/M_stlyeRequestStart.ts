@@ -7,6 +7,7 @@ export const RequestContainer = styled.div`
   align-items: center;
   margin-top: 1rem;
   position: relative;
+  width: 100%;
 `;
 
 export const RequestSpan = styled.span`
