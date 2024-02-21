@@ -1,191 +1,65 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import iconComment from "../../../assets/Icons/fi-rr-comments.svg";
-import iconHeart from "../../../assets/Icons/fi-rr-heart.svg";
 import iconHeart2 from "../../../assets/Icons/fi-sr-heart.svg";
-import iconPlus from "../../../assets/Icons/icon_plus.svg";
-import test_review from "../../../assets/test-review.svg";
 import test_userimg from "../../../assets/test-userimg.svg";
-import {
-  MainReviewCommentIcon,
-  MainReviewCommentInput,
-  MainReviewCommentInputButton,
-  MainReviewCommentInputWrapper,
-  MainReviewCommentandHeart,
-  ModalContentComment,
-  ModalContentCommentCardContent,
-  ModalContentCommentCardContentDate,
-  ModalContentCommentCardContentImg,
-  ModalContentCommentCardContentName,
-  ModalContentCommentCardContentText,
-  ModalContentCommentCardContentTop,
-  ModalContentCommentCardUserImg,
-  ModalContentCommentCardWrapper,
-} from "./stlyeStreetDetailComment";
-interface ReplyContent {
-  id: string;
-  userimg: string;
-  date: string;
-  content: string;
-  heart: boolean;
-  replies?: ReplyContent[];
+import { ReviewDetail } from "../../../constants/interface";
+import * as W from "./stlyeStreetDetailComment";
+interface ReviewDetailProps {
+  reviewDetail: ReviewDetail[];
 }
 
-interface Comment {
-  reviewId: number;
-  replyPhoto: string;
-  replyContent: ReplyContent;
-}
-
-const StreetDetailComment = () => {
-  const { id } = useParams();
-  const [commentList, setCommentList] = useState<Comment[]>([]);
-  const [newComment, setNewComment] = useState<string>("");
-  useEffect(() => {
-    setCommentList([
-      {
-        reviewId: 1,
-        replyPhoto: test_review,
-        replyContent: {
-          id: "Yeondu",
-          userimg: test_userimg,
-          date: "2023.01.03",
-          content: "몰랐는데 저도 가봐야겠네요!",
-          heart: false,
-        },
-      },
-      {
-        reviewId: 2,
-        replyPhoto: test_review,
-        replyContent: {
-          id: "Yeondu",
-          userimg: test_userimg,
-          date: "2023.01.03",
-          content: "몰랐는데 저도 가봐야겠네요!",
-          heart: false,
-        },
-      },
-      {
-        reviewId: 3,
-        replyPhoto: test_review,
-        replyContent: {
-          id: "Yeondu",
-          userimg: test_userimg,
-          date: "2023.01.03",
-          content: "몰랐는데 저도 가봐야겠네요!",
-          heart: false,
-        },
-      },
-    ]);
-  }, []);
-  const toggleHeart = (reviewId: number) => {
-    setCommentList(
-      commentList.map((comment) =>
-        comment.reviewId === reviewId
-          ? {
-              ...comment,
-              replyContent: {
-                ...comment.replyContent,
-                heart: !comment.replyContent.heart,
-              },
-            }
-          : comment
-      )
-    );
-  };
-  const addComment = () => {
-    const newCommentObj = {
-      reviewId: commentList.length + 1, // 아이디 우케 나오노
-      replyPhoto: "newPhotoURL",
-      replyContent: {
-        id: "NewUser",
-        userimg: "",
-        date: new Date().toLocaleDateString(),
-        content: newComment,
-        heart: false,
-      },
-    };
-    setCommentList([...commentList, newCommentObj]);
-    setNewComment("");
-  };
-  const addReply = (reviewId: number, replyContent: string) => {
-    setCommentList(
-      commentList.map((comment) => {
-        if (comment.reviewId === reviewId) {
-          const newReply: ReplyContent = {
-            id: "ReplyUser", // 대댓글 작성자 ID
-            userimg: test_userimg, // 대댓글 작성자 이미지
-            date: new Date().toLocaleDateString(),
-            content: replyContent,
-            heart: false,
-          };
-          const updatedReplies = comment.replyContent.replies
-            ? [...comment.replyContent.replies, newReply]
-            : [newReply];
-          return {
-            ...comment,
-            replyContent: {
-              ...comment.replyContent,
-              replies: updatedReplies,
-            },
-          };
-        }
-        return comment;
-      })
-    );
-  };
-  
+const StreetDetailComment: React.FC<ReviewDetailProps> = ({ reviewDetail }) => {
   return (
-    <ModalContentComment>
+    <W.ModalContentComment>
       {/* 댓글 매핑 */}
-      <>
-        {commentList.map((comment) => (
-          <ModalContentCommentCardWrapper key={comment.reviewId}>
-            <ModalContentCommentCardUserImg
-              src={comment.replyContent.userimg}
-              alt="testUserImg"
-            />
-            {/* 수정 */}
-            <ModalContentCommentCardContent>
-              <ModalContentCommentCardContentTop>
-                <ModalContentCommentCardContentName>
-                  {comment.replyContent.id}
-                </ModalContentCommentCardContentName>
-                <ModalContentCommentCardContentDate>
-                  {comment.replyContent.date}
-                </ModalContentCommentCardContentDate>
-              </ModalContentCommentCardContentTop>
-              <ModalContentCommentCardContentText>
-                {comment.replyContent.content}
-              </ModalContentCommentCardContentText>
-            </ModalContentCommentCardContent>
-            <ModalContentCommentCardContentImg $img={comment.replyPhoto} />
-            <MainReviewCommentandHeart>
-              <MainReviewCommentIcon src={iconComment} alt="iconComment" />
-
-              <MainReviewCommentIcon
-                onClick={() => toggleHeart(comment.reviewId)}
-                src={comment.replyContent.heart ? iconHeart2 : iconHeart}
-                alt="iconHeart"
+      {reviewDetail.map((comment, index) => {
+        const dateObject = new Date(comment.createdDate);
+        const year = dateObject.getFullYear().toString().slice(2);
+        const month = (dateObject.getMonth() + 1).toString().padStart(2, "0");
+        const day = dateObject.getDate().toString().padStart(2, "0");
+        const hours = dateObject.getHours().toString().padStart(2, "0");
+        const minutes = dateObject.getMinutes().toString().padStart(2, "0");
+        // 변경된 날짜 형식
+        const formattedDate = `${year}.${month}.${day} ${hours}:${minutes}`;
+        return (
+          <W.ModalContentCommentCardWrapper key={index}>
+            {comment.member.picture !== null ? (
+              <W.ModalContentCommentCardUserImg
+                src={comment.member.picture}
+                alt="userImg"
               />
-            </MainReviewCommentandHeart>
-          </ModalContentCommentCardWrapper>
-        ))}
-      </>
-      {/* 댓글 추가 */}
-      <MainReviewCommentInputWrapper>
-        <MainReviewCommentInput
-          type="text"
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-        />
-        <MainReviewCommentInputButton
-          src={iconPlus}
-          alt="iconPlus"
-          onClick={addComment}
-        />
-      </MainReviewCommentInputWrapper>
-    </ModalContentComment>
+            ) : (
+              <W.ModalContentCommentCardUserImg
+                src={test_userimg}
+                alt="userImg"
+              />
+            )}
+            {/* 수정 */}
+            <W.ModalContentCommentCardContent>
+              <W.ModalContentCommentCardContentTop>
+                {/* 삭제된거에 대해서는 이름을 없애기 위해 */}
+                {comment.member.nickName && (
+                  <W.ModalContentCommentCardContentName>
+                    {comment.member.nickName}
+                  </W.ModalContentCommentCardContentName>
+                )}
+                <W.ModalContentCommentCardContentDate>
+                  {formattedDate}
+                </W.ModalContentCommentCardContentDate>
+              </W.ModalContentCommentCardContentTop>
+              <W.ModalContentCommentCardContentText>
+                {comment.content}
+              </W.ModalContentCommentCardContentText>
+            </W.ModalContentCommentCardContent>
+            <W.ModalContentCommentCardContentImg $img={comment.photoList[0]} />
+            <W.MainReviewCommentandHeart>
+              <W.MainReviewCommentIcon src={iconComment} alt="iconComment" />
+              {/* 좋아요 기능 나오면 입히기 */}
+              <W.MainReviewCommentIcon src={iconHeart2} alt="iconHeart" />
+            </W.MainReviewCommentandHeart>
+          </W.ModalContentCommentCardWrapper>
+        );
+      })}
+    </W.ModalContentComment>
   );
 };
 export default StreetDetailComment;

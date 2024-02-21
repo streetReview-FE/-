@@ -13,10 +13,9 @@ export const PostReviewPageContainer = styled.div`
 export const PostReviewPageWrapper = styled.div`
   display: flex;
   width: 100%;
-  height: 90vh;
+  height: 85vh;
   background-color: rgba(255, 255, 255, 1);
   border-radius: 1.25rem 1.25rem 0rem 0rem;
-  box-shadow: 0rem 0.3rem 0.3rem 0rem rgba(0, 0, 0, 0.25);
   z-index: 50;
   margin-top: 1.06rem;
 `

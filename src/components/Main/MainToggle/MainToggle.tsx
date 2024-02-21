@@ -1,3 +1,4 @@
+import { message } from "antd";
 import { useEffect, useState } from "react";
 import { ReactComponent as iconMainMenuGroup } from "../../../assets/Icons/icon_main_menu_group.svg";
 import IconLogin from "../../../assets/Icons/web_light_rd_SI.svg";
@@ -16,6 +17,7 @@ const MainToggle = () => {
   };
   useEffect(() => {
     if (accessToken) {
+      message.success("로그인에 성공했습니다!");
       setIsLogin(true);
     } else {
       setIsLogin(false);

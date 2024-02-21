@@ -2,18 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { Coordinates, Review, StoreState } from "../constants/interface";
+import { Review, StoreState } from "../constants/interface";
 import useGetCurrentLocation from "../hooks/googleMappigHooks/useGetCurrentLocation";
 import addMarker from "./AddMarker/AddMarker";
-import { getReviews } from "./Posts/reviews";
 
 const GoogleMaps = () => {
   useGetCurrentLocation();
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const { coordinates } = useSelector((state: StoreState) => state.map);
-  const [selectedReviews, setSelectedReviews] = useState<Review[]>([]);
-  const [selectedCoords, setSelectedCoords] = useState<Coordinates | null>(null);
-
   useEffect(() => {
     if (!window.google) {
       console.error("구글 API가 안됩니다.");
@@ -53,13 +49,11 @@ const GoogleMaps = () => {
         )
         .then((res) => {
           const streetData: Review[] = res.data.data;
+          console.log("dmddo", res.data.data);
           streetData.forEach((street) => {
             addMarker(
               map,
               street,
-              getReviews,
-              setSelectedReviews,
-              setSelectedCoords
             );
           });
         })

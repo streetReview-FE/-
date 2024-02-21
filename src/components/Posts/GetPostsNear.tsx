@@ -37,14 +37,14 @@ const GetPostNearList: React.FC<GetPostListProps> = ({ coordinate }) => {
     };
   }, [coordinate]);
   const navigate = useNavigate();
-  const handleOnClickReview = (id: number) => {
-    navigate(`/review/${id}`);
+  const handleOnClickReview = (x: number, y:number) => {
+    navigate(`/review/${x}/${y}`);
   };
   return (
     <>
       {reviews.map((review, index) => (
         <React.Fragment key={index}>
-          <M.CardWrapper onClick={() => handleOnClickReview(review.id)}>
+          <M.CardWrapper onClick={() => handleOnClickReview(review.x,review.y)}>
             {review.photoList[0] && (
               <M.CardImg src={review.photoList[0]} alt="reviewimgindex1" />
             )}
@@ -64,10 +64,6 @@ const GetPostNearList: React.FC<GetPostListProps> = ({ coordinate }) => {
               </M.TopContent>
               <M.BottomDiv>
                 <M.TagWrapper>
-                  {/* {review.tagsList.map((tag, tagIndex) => (
-                    <M.Box${tagIndex}Div key={tagIndex}>#{tag.value}</M.Box1Div>
-                    // <li key={tagIndex}>{tag.value}</li>
-                  ))} */}
                   {review.tagsList[0]?.value && (
                     <M.Box1Div>#{review.tagsList[0]?.value}</M.Box1Div>
                   )}

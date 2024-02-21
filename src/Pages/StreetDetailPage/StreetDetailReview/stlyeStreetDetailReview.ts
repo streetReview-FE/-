@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Colors from "../../../Styles/Colors";
 
 // 모달
 export const ModalContentReview = styled.div`
@@ -15,6 +16,7 @@ export const ModalContentReviewTop = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin-bottom: 1rem;
 `;
 export const ModalContentReviewTopArrow = styled.div`
   color: rgba(239, 125, 22, 1);
@@ -30,17 +32,24 @@ export const ModalContentReviewContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   position: relative;
   width: 27.1875rem;
   height: 6.6875rem;
   border-radius: 0.625rem;
-  background: #fff;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  color: #000;
+  background: ${Colors.request.backgroundColor};
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25)
 
+  color: #7b7b7b;
   font-size: 0.625rem;
-  font-weight: 500;
+  font-weight: 400;
   z-index: 3;
+`;
+export const ModalContentReviewContentSpan = styled.span`
+  color: #7b7b7b;
+  font-size: 0.7rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
 `;
 // 회색 화살표, 리뷰 내용
 export const ModalContentReviewContentGrayArrowIcon = styled.img`

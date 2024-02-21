@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import StreetDetailPage from "../../../Pages/StreetDetailPage/StreetDetailPage";
 import testEventBanner from "../../../assets/test-eventbanner.png";
 import type { Coordinates, Review } from "../../../constants/interface";
 import GetPostList from "../../Posts/GetPosts";
 import GetPostNearList from "../../Posts/GetPostsNear";
 
 const MainMappingReview = () => {
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [currentCoord, setCurrentCoord] = useState<Coordinates | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [viewMode, setViewMode] = useState('nearby'); 
@@ -40,7 +38,6 @@ const MainMappingReview = () => {
             <GetPostNearList coordinate={currentCoord} reviews={reviews}/>
           )}
       </MainReviewContainer>
-      {isOpenModal && <StreetDetailPage />}
       {/* 이벤트 배너가 들어가는 곳 */}
       <MainReviewContentEventBanner src={testEventBanner} alt="testUser" />
     </MainReviewWrapper>

@@ -1,6 +1,6 @@
+import { message } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
 const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const useUploadImg = () => {
@@ -32,10 +32,12 @@ const useUploadImg = () => {
       );
       console.log(response);
       if (target === "STREET") {
+        message.success("이미지 등록에 성공했습니다!");
         navigate("/");
       }
     } catch (error) {
       console.log(error);
+      message.error("등록에 실패했습니다!");
     }
   };
 

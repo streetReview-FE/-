@@ -21,6 +21,7 @@ export const ModalContentCommentCardWrapper = styled.div`
 export const ModalContentCommentCardUserImg = styled.img`
   width: 2.1875rem;
   height: 2.1875rem;
+  border-radius: 1rem;
 `;
 
 // 날짜 및 내용

@@ -63,8 +63,8 @@ const LikeCommentBoxWrapper = styled.div`
   align-items: center;
   margin-bottom: 0.56rem;
   background: rgba(240, 240, 240, 1);
-  width: 16.875rem;
-  height: 3.0625rem;
+  width: 41.1875rem;
+  height: 7.875rem;
   border-radius: 1.25rem;
 `;
 const LikeCommentBoxHeart = styled.img`

@@ -141,6 +141,7 @@ const LikeCommentContainer = styled.div`
 
 const LikeCommentWrapper = styled.div`
   min-height: 28.125rem;
+  width: 51.5625rem;
   position: relative;
   padding-top: 0.63rem;
 `;

@@ -1,3 +1,4 @@
+import { message } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 import IconCamera from "../../../../assets/Icons/icon_postreviewCamera.png";
 import { ImgPorpLocationState } from "../../../../constants/interface";
@@ -9,7 +10,7 @@ const M_RequsetPotoChk = () => {
   const state = location.state as ImgPorpLocationState;
   const { id } = state;
   const handleHome = () => {
-    alert("요청했습니다!");
+    message.success("요청했습니다!");
     navigate(`/`);
   };
 

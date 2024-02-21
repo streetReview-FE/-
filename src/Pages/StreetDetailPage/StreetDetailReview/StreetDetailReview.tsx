@@ -1,56 +1,66 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ReactComponent as Iconarrow } from "../../../assets/Icons/fi-sr-arrow-small-right.svg";
 import iconGrayArrow from "../../../assets/Icons/icon_modalcontentgrayarrow.svg";
-import testreviewsvg from "../../../assets/test-review.svg";
-import {
-    ModalContentReview,
-    ModalContentReviewContent,
-    ModalContentReviewContentGrayArrowIcon,
-    ModalContentReviewTop,
-    ModalContentReviewTopArrow,
-    ModalContentReviewTopArrowIcon,
-    ReviewCardImg,
-    ReviewCardTagBox1,
-    ReviewCardTagBox2,
-    ReviewCardTagBox3,
-    ReviewCardTagWrapper
-} from "./stlyeStreetDetailReview";
-const StreetDetailReview = () => {
-  const { id } = useParams();
+import { StreetDetail } from "../../../constants/interface";
+import * as W from "./stlyeStreetDetailReview";
+interface StreetDetailReviewProps {
+  streetDetail: StreetDetail;
+}
+const StreetDetailReview: React.FC<StreetDetailReviewProps> = ({
+  streetDetail,
+}) => {
   const navigate = useNavigate();
   return (
-    <ModalContentReview>
+    <W.ModalContentReview>
       {/* 리뷰쓰러가기 */}
-      <ModalContentReviewTop>
-        <ModalContentReviewTopArrow onClick={() => navigate(`/request`)}>거리 등록하러 가기</ModalContentReviewTopArrow>
-        <ModalContentReviewTopArrowIcon
+      <W.ModalContentReviewTop onClick={() => navigate(`/request`)}>
+        <W.ModalContentReviewTopArrow>
+          거리 요청하러 가기
+        </W.ModalContentReviewTopArrow>
+        <W.ModalContentReviewTopArrowIcon
           fill={"rgba(239, 125, 22, 1)"}
           as={Iconarrow}
         />
-      </ModalContentReviewTop>
+      </W.ModalContentReviewTop>
       {/* 리뷰 내용 */}
-      <ModalContentReviewContent>
-        회현 살면서 15년 넘게 단골인 집 !! 꼭 가보세요... 진짜 맛있습니다@@@
-      </ModalContentReviewContent>
-      <ModalContentReviewContentGrayArrowIcon
+      <W.ModalContentReviewContent>
+        <W.ModalContentReviewContentSpan>
+          {streetDetail.streetName}
+        </W.ModalContentReviewContentSpan>
+        {streetDetail.streetAddress}
+      </W.ModalContentReviewContent>
+      <W.ModalContentReviewContentGrayArrowIcon
         src={iconGrayArrow}
         alt="GrayArrow"
       />
       {/* 유저아이콘 및 이름 생략 */}
-      <div style={{marginTop: "1rem"}}/>
+      <div style={{ marginTop: "1rem" }} />
       {/* <MainRevieWCardReviewerImg src={testUser} alt="testUser" />
       <MainRevieWCardReviewer>Yeondu</MainRevieWCardReviewer> */}
-      <ReviewCardImg $img={testreviewsvg}>
+      <W.ReviewCardImg $img={streetDetail.photoList[0]}>
         {/* 등록일 생략 */}
         {/* <RevieWCardDate>2023.01.03</RevieWCardDate> */}
-      </ReviewCardImg>
-      <ReviewCardTagWrapper>
+      </W.ReviewCardImg>
+      <W.ReviewCardTagWrapper>
         {/* 태그정렬은 최대 3개, 개수만큼 출력 */}
-        <ReviewCardTagBox1>ska</ReviewCardTagBox1>
-        <ReviewCardTagBox2>eoans</ReviewCardTagBox2>
-        <ReviewCardTagBox3>tlwkd</ReviewCardTagBox3>
-      </ReviewCardTagWrapper>
-    </ModalContentReview>
+        {/* 태그정렬은 최대 3개, 개수만큼 출력 */}
+        {streetDetail.tagsList[0]?.value && (
+          <W.ReviewCardTagBox1>
+            #{streetDetail.tagsList[0]?.value}
+          </W.ReviewCardTagBox1>
+        )}
+        {streetDetail.tagsList[1]?.value && (
+          <W.ReviewCardTagBox2>
+            #{streetDetail.tagsList[1]?.value}
+          </W.ReviewCardTagBox2>
+        )}
+        {streetDetail.tagsList[2]?.value && (
+          <W.ReviewCardTagBox3>
+            #{streetDetail.tagsList[2]?.value}
+          </W.ReviewCardTagBox3>
+        )}
+      </W.ReviewCardTagWrapper>
+    </W.ModalContentReview>
   );
 };
 

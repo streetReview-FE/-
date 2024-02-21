@@ -1,3 +1,4 @@
+import { message } from "antd";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -21,8 +22,8 @@ const M_StreetDetailPage = () => {
   const { writeReview } = useWriteReview();
   const [newComment, setNewComment] = useState<string>("");
   const [newFileImgs, setNewFileImgs] = useState<File[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-    
   useEffect(() => {
     if (x && y) {
       getStreetDetail(x, y); //거리 상세보기
@@ -37,12 +38,17 @@ const M_StreetDetailPage = () => {
       lng: Number(y),
     };
     if (newComment.trim() !== "" && x && y) {
+      setIsLoading(true);
       try {
         await writeReview(PostData, newComment, newFileImgs);
         getReviewDetail(x, y);
         setNewComment(""); // 입력 필드 초기화
       } catch (error) {
         console.error("Error writing review:", error);
+        message.error("댓글 등록에 실패했습니다!");
+      } finally {
+        message.success("댓글 등록에 성공했습니다!");
+        setIsLoading(false); // 로딩 상태 해제
       }
     }
   };
@@ -71,6 +77,7 @@ const M_StreetDetailPage = () => {
       <ModalWrapper>
         <MTopSideToggle />
         <ModalContentWrapper>
+          {isLoading && <div>Loading...</div>}
           <MStreetDetailReview streetDetail={streetDetail} />
           <MStreetDetailComment reviewDetail={reviewDetailArr} />
           <MainReviewCommentInputWrapper>
