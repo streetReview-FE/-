@@ -27,7 +27,7 @@ const Router = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/googleMap" element={<GoogleMaps />} />
-          <Route path="/" element={<MainPage />} />
+          <Route path="" element={<MainPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/google/auth" element={<RedirectionPage />} />
 
