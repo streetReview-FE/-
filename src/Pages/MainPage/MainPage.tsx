@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Login from "../../components/Login/GoogleLogin";
 import MainSearchBar from "../../components/Main/MainSearchBar/MainSearchBar";
 import MainSwipeContent from "../../components/Main/MainSwipeContent/MainSwipeContent";
 import MainToggle from "../../components/Main/MainToggle/MainToggle";
@@ -19,7 +18,7 @@ const MainPage = () => {
       />
       {/* 오른쪽 끝 메뉴 */}
       <MainToggle />
-      <Login />
+      {/* <Login /> */}
     </>
   );
 };

@@ -1,11 +1,10 @@
-import axios from "axios";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { ReactComponent as Iconarrow } from "../../../assets/Icons/fi-sr-arrow-small-right.svg";
+import { useLocation } from "react-router-dom";
 import iconPlusBox from "../../../assets/Icons/icon_plusbox.svg";
 import iconXBox from "../../../assets/Icons/icon_xbox.svg";
 import { RequestStreet } from "../../../constants/interface";
-import { ArrowIcon, RequestContainer, RequestSpan } from "../stlyeRequest";
+import usePostStreet from "../../../hooks/usePostStreet";
+import { RequestContainer, RequestSpan } from "../stlyeRequest";
 import {
   InputForm,
   InputFormInput,
@@ -35,30 +34,10 @@ const RequestMappingContent = () => {
   });
   const [checkTitle, setCheckTitle] = useState(false);
   const [checkTag, setCheckTag] = useState(false);
+  const { postStreet } = usePostStreet();
 
-  const handleRequest = async () => {
-    const config = {
-      // withCredentials: true,
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-    try {
-      const res = await axios.post(
-        `${apiUrl}/street/registration`,
-        formData,
-        config
-      );
-      console.log(res);
-      if (res.status === 200) {
-        navigate("/");
-      } else {
-        throw new Error("거리요청 실패");
-      }
-    } catch (error) {
-      console.log("error : ", error);
-      navigate("/");
-    }
+  const handleRequest = () => {
+    postStreet(formData);
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -112,7 +91,6 @@ const RequestMappingContent = () => {
       handleRequest();
     }
   };
-  const navigate = useNavigate();
   return (
     <RequestContainer>
       <RequestSpan>거리 위치 검색</RequestSpan>
@@ -159,11 +137,11 @@ const RequestMappingContent = () => {
           <InputFormSubmitButton type="submit">등록하기</InputFormSubmitButton>
         </InputForm>
       </RequestCheckSearchBarWrapper>
-      <ArrowIcon
+      {/* <ArrowIcon
         onClick={() => navigate(`/request/place`)}
         fill={"rgba(239, 125, 22, 1)"}
         as={Iconarrow}
-      />
+      /> */}
     </RequestContainer>
   );
 };

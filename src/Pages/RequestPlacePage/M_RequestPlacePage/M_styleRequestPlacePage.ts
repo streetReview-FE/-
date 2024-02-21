@@ -12,7 +12,7 @@ export const RequestPageContainer = styled.div`
 export const RequestPageWrapper = styled.div`
   display: flex;
   width: 100%;
-  height: 90vh;
+  height: 85vh;
   background-color: rgba(255, 255, 255, 1);
   border-radius: 1.25rem 1.25rem 0rem 0rem;
   z-index: 50;

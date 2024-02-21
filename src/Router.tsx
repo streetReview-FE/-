@@ -18,6 +18,8 @@ import PostReviewText from "./components/PostReview/PostReviewText/PostReviewTex
 import RequestMapping from "./components/Request/RequestMapping/RequestMapping";
 import RequestMappingContent from "./components/Request/RequestMappingContent/RequestMappingContent";
 import RequestStart from "./components/Request/RequestStart/RequestStart";
+import M_RequsetPoto from "./components/Request/RequsetPoto/M_RequsetPoto/M_RequsetPoto";
+import M_RequsetPotoChk from "./components/Request/RequsetPotoChk/M_RequsetPotoChk/M_RequsetPotoChk";
 import { PrivateRoute } from './utils/PrivateRoute';
 const Router = () => {
   return (
@@ -36,13 +38,13 @@ const Router = () => {
               <Route path="likecomment" element={<MyLikeComment />} />
               <Route path="secession" element={<MySecession />} />
             </Route>
-            <Route path="/review" element={<StreetDetailPage />}>
-              <Route path=":id" element={<MySecession />} />
-            </Route>
+            <Route path="/review/:x/:y" element={<StreetDetailPage />}/>
             <Route path="/request" element={<RequestPlacePage />}>
               <Route path="" element={<RequestStart />} />
               <Route path="place" element={<RequestMapping />} />
               <Route path="place/content" element={<RequestMappingContent />} />
+              <Route path="place/potoChk" element={<M_RequsetPotoChk />} />
+            <Route path="place/poto" element={<M_RequsetPoto />} />
             </Route>
             <Route path="/postReview" element={<PostReviewPage />}>
               <Route path="" element={<PostReviewText />} />

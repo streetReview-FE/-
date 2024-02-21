@@ -21,8 +21,8 @@ const M_StreetDetailPage = () => {
   const { writeReview } = useWriteReview();
   const [newComment, setNewComment] = useState<string>("");
   const [newFileImgs, setNewFileImgs] = useState<File[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-    
   useEffect(() => {
     if (x && y) {
       getStreetDetail(x, y); //거리 상세보기
@@ -37,12 +37,15 @@ const M_StreetDetailPage = () => {
       lng: Number(y),
     };
     if (newComment.trim() !== "" && x && y) {
+      setIsLoading(true);
       try {
         await writeReview(PostData, newComment, newFileImgs);
-        getReviewDetail(x, y);
+        await getReviewDetail(x, y);
         setNewComment(""); // 입력 필드 초기화
       } catch (error) {
         console.error("Error writing review:", error);
+      } finally {
+        setIsLoading(false); // 로딩 상태 해제
       }
     }
   };
@@ -71,6 +74,7 @@ const M_StreetDetailPage = () => {
       <ModalWrapper>
         <MTopSideToggle />
         <ModalContentWrapper>
+          {isLoading && <div>Loading...</div>}
           <MStreetDetailReview streetDetail={streetDetail} />
           <MStreetDetailComment reviewDetail={reviewDetailArr} />
           <MainReviewCommentInputWrapper>

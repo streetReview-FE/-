@@ -6,7 +6,6 @@ import GetPostList from "../../../Posts/GetPosts";
 import MGetPostNearList from "../../../Posts/M_Post/M_GetPostsNear";
 
 const M_MainMappingReview = () => {
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [currentCoord, setCurrentCoord] = useState<Coordinates | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [viewMode, setViewMode] = useState('nearby'); 

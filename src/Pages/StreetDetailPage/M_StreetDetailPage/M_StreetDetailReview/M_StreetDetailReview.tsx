@@ -19,14 +19,16 @@ const M_StreetDetailReview: React.FC<StreetDetailReviewProps> = ({
         <M.ModalContentReviewTopArrowIcon
           fill={Colors.request.SpanGray}
           as={Iconarrow}
-          onClick={() => navigate(`/`)}
+          onClick={() => navigate(`/request`)}
         />
       </M.ModalContentReviewTop>
       {/* 리뷰 내용 */}
       <M.ReviewContent>
         <M.ReviewCardImg $img={streetDetail.photoList[0]} />
         <M.ModalContentReviewContent>
-          <span>{streetDetail.streetName}</span>
+          <M.ModalContentReviewContentSpan>
+            {streetDetail.streetName}
+          </M.ModalContentReviewContentSpan>
           {streetDetail.streetAddress}
           <M.ContentNavigateWrapper onClick={() => navigate(`/postReview`)}>
             거리 요청하러 가기

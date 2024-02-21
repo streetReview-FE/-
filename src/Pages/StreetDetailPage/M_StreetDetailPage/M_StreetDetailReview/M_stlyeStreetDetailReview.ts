@@ -41,17 +41,17 @@ export const ModalContentReviewContent = styled.div`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding-top: 2.06rem;
 
-  span {
-    color: #7b7b7b;
-    font-size: 0.8rem;
-    font-weight: 400;
-    margin-bottom: 0.7rem;
-  }
   color: #7b7b7b;
   font-size: 0.625rem;
   font-weight: 400;
 
   z-index: 3;
+`;
+export const ModalContentReviewContentSpan = styled.span`
+  color: #7b7b7b;
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin-bottom: 0.7rem;
 `;
 export const ContentNavigateWrapper = styled.div`
   display: flex;
