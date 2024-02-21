@@ -1,7 +1,9 @@
+import { message } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const apiUrl = process.env.REACT_APP_BASE_URL;
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 const useCheckMember = () => {
   const navigate = useNavigate();
@@ -23,11 +25,21 @@ const useCheckMember = () => {
       if (axios.isAxiosError(error)) {
         const err = error.response?.data.code;
         if (err === 400) {
-          window.alert("로그인 후 이용해 주세요.");
-          navigate("/");
+          if (isMobile) {
+            message.error("로그인 후 이용해 주세요.");
+            navigate("/");
+          } else {
+            window.alert("로그인 후 이용해 주세요.");
+            navigate("/");
+          }
         } else {
-          window.alert("권한이 없습니다.!!!!!!");
-          navigate("/");
+          if (isMobile) {
+            message.error("권한이 없습니다.");
+            navigate("/");
+          } else {
+            window.alert("권한이 없습니다.");
+            navigate("/");
+          }
         }
       }
       }

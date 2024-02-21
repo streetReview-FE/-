@@ -4,20 +4,19 @@ import { Coordinates, Review } from "../../constants/interface";
 const accessToken = localStorage.getItem("token");
 
 export const getReviews = async (coords: Coordinates): Promise<Review[]> => {
-  const getData = {
+  const PostData = {
     x: coords.lat,
     y: coords.lng,
   };
-  console.log(getData);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+  console.log(PostData);
   try {
-    const response = await axios.get("/reviews/all", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      params: getData,
-    });
-    console.log("리뷰목록",response);
+    const response = await axios.post(`/reviews/all`, PostData, config);
+    console.log("리뷰목록", response);
     if (
       response.data.data &&
       Array.isArray(response.data.data) &&

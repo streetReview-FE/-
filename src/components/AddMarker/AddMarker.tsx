@@ -3,12 +3,10 @@ import customIcon from "../../assets/Icons/custom-marker.svg";
 import { Review } from "../../constants/interface";
 import AddMarkerItem from "./AddMarkerItem";
 
+const HOME_BASE_URL = process.env.REACT_APP_HOME_URL;
 const addMarker = (
   map: google.maps.Map,
   street: Review,
-  getReviews: Function,
-  setSelectedReviews: Function,
-  setSelectedCoords: Function
 ) => {
   const markersData = new Map<google.maps.Marker, Review>();
   const streetLocation = {
@@ -44,14 +42,7 @@ const addMarker = (
 
   marker.addListener("click", async () => {
     infoWindow.open(map, marker);
-    const coords = {
-      lat: street.x,
-      lng: street.y,
-    };
-    getReviews(coords).then((reviews: Review[]) => {
-      setSelectedReviews(reviews);
-      setSelectedCoords(coords);
-    });
+    window.location.href=`${HOME_BASE_URL}/review/${street.x}/${street.y}`;
   });
 };
 

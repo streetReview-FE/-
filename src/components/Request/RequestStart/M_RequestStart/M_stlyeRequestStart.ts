@@ -8,6 +8,7 @@ export const RequestContainer = styled.div`
   margin-top: 1rem;
   position: relative;
   width: 100%;
+  padding-top: 1.06rem;
 `;
 
 export const RequestSpan = styled.span`
@@ -35,7 +36,8 @@ export const RequestCheckButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 7.1rem;
+  margin-top: 5.1rem;
+  margin-bottom: 2rem;
 
   color: ${Colors.white};
   text-align: center;

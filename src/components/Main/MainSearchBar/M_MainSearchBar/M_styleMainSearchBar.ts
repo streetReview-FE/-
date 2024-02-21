@@ -17,13 +17,13 @@ export const SearchBarWrapper = styled.div`
   align-items: center;
   justify-content: space-around;
   width: 14.75rem;
-  height: 2.5rem;
+  height: 2.3rem;
   border-radius: 1.125rem;
   background: ${Colors.orange};
 `;
 export const SearchBarLogo = styled.div`
-  width: 5.75rem;
-  height: 2.1875rem;
+  width: 5rem;
+  height: 2.3rem;
   color: ${Colors.mainColor};
   text-align: center;
   font-size: 1.25rem;

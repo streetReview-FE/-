@@ -1,3 +1,4 @@
+import { message } from "antd";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import iconPlusBox from "../../../../assets/Icons/icon_plusbox.svg";
@@ -69,10 +70,9 @@ const M_RequestMappingContent = () => {
     setCheckTag(filteredTagList.length > 0);
 
     if (!(filteredTitle.length > 0)) {
-      alert("거리이름을 입력해주세요.");
-    }
-    if (!(filteredTagList.length > 0)) {
-      alert("태그를 1개이상 입력해주세요.");
+      message.error("거리이름을 입력해주세요.");
+    } else if (!(filteredTagList.length > 0)) {
+      message.error("태그를 1개이상 입력해주세요.");
     }
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

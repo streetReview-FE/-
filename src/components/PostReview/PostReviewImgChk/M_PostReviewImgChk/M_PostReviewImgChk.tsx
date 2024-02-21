@@ -1,12 +1,13 @@
+import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 import IconCamera from "../../../../assets/Icons/icon_postreviewCamera.png";
 import * as M from "./M_stlyePostReviewImgChk";
 
 const M_PostReviewImgChk = () => {
-    const handleHome = () => {
-        alert("요청했습니다!");
-        navigate(`/`);
-    }
+  const handleHome = () => {
+    message.success("요청했습니다!");
+    navigate(`/`);
+  };
   const navigate = useNavigate();
   return (
     <M.PostReViewContainer>
