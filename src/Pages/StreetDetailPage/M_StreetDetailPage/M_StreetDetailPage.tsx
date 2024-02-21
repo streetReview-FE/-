@@ -1,3 +1,4 @@
+import { message } from "antd";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -40,11 +41,13 @@ const M_StreetDetailPage = () => {
       setIsLoading(true);
       try {
         await writeReview(PostData, newComment, newFileImgs);
-        await getReviewDetail(x, y);
+        getReviewDetail(x, y);
         setNewComment(""); // 입력 필드 초기화
       } catch (error) {
         console.error("Error writing review:", error);
+        message.error("댓글 등록에 실패했습니다!");
       } finally {
+        message.success("댓글 등록에 성공했습니다!");
         setIsLoading(false); // 로딩 상태 해제
       }
     }
