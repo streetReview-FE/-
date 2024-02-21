@@ -1,5 +1,6 @@
 import styled from "styled-components";
-export const RequestPageContainer = styled.div`
+
+export const PostReviewPageContainer = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -7,32 +8,32 @@ export const RequestPageContainer = styled.div`
   width: 100%;
   height: 100%;
   padding-top: 1.06rem;
-`;
-
-export const RequestPageWrapper = styled.div`
+`
+// 마이페이지 고정화면
+export const PostReviewPageWrapper = styled.div`
   display: flex;
   width: 100%;
   height: 90vh;
   background-color: rgba(255, 255, 255, 1);
   border-radius: 1.25rem 1.25rem 0rem 0rem;
+  box-shadow: 0rem 0.3rem 0.3rem 0rem rgba(0, 0, 0, 0.25);
   z-index: 50;
   margin-top: 1.06rem;
-`;
-
+`
+// 마이페이지 오른쪽 화면
 export const ContainerContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-`;
-
+  width:100%;
+`
+// 마이페이지 화면 위치 타이틀 상태
 export const ContentDivWrapper = styled.div`
-  margin-top: 3.81rem;
+  margin-top: 3.81rem; 
   display: flex;
   align-items: center;
   flex-direction: column;
-  color: #f0780c;
+  color: #F0780C;
   text-align: center;
   font-size: 1.75rem;
   font-weight: 700;
-`;
-
+`

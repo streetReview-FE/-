@@ -96,3 +96,35 @@ export interface RequestStreet {
   y: number;
   tagList: { value: string }[];
 }
+
+// 상세정보
+export interface StreetDetail {
+  streetName: string;
+  streetAddress: string;
+  x: number;
+  y: number;
+  reviewCount: number;
+  content: string;
+  likey: number;
+
+  photoList: string[];
+  tagsList: Tag[];
+}
+export interface ReviewDetail {
+  content: string;
+  likey: number;
+  createdDate: string; 
+  updatedDate: string;
+  member: {
+    memberId: number;
+    providerId: string;
+    email: string;
+    nickName: string;
+    picture: string;
+  };
+  photoList: string[];
+}
+
+export interface ImgPorpLocationState {
+  id: string;
+}

@@ -1,18 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as Iconarrow } from "../../../assets/Icons/fi-sr-arrow-small-right.svg";
-import IconPostReviewText from "../../../assets/Icons/icon_postreviewtext.png";
+import { ReactComponent as Iconarrow } from "../../../../assets/Icons/fi-sr-arrow-small-right.svg";
 import {
-  PostReViewContainer,
-  PostReviewTopIcon,
-  PostReviewTopSpan,
-} from "../stylePostReview";
-import { ArrowIcon, PostReviewTextArea } from "./stlyePostReviewText";
+    PostReViewContainer,
+} from "../../stylePostReview";
+import { ArrowIcon, PostReviewTextArea, PostReviewTopSpan } from "./M_stlyePostReviewText";
 
-const PostReviewText = () => {
+const M_PostReviewText = () => {
   const navigate = useNavigate();
   return (
     <PostReViewContainer>
-      <PostReviewTopIcon $img={IconPostReviewText} />
       <PostReviewTopSpan>방문은 어떠셨나요?</PostReviewTopSpan>
       <PostReviewTextArea
         id="searchKetword"
@@ -27,4 +23,4 @@ const PostReviewText = () => {
   );
 };
 
-export default PostReviewText;
+export default M_PostReviewText;

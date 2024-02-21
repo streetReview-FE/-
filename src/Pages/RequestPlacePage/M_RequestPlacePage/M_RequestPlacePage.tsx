@@ -3,10 +3,10 @@ import { Outlet } from "react-router-dom";
 import { Container } from "../../../components/Login/style";
 import MTopSideToggle from "../../../components/TopSideToggle/M_TopSideToggle/M_TopSideToggle";
 import {
-    ContainerContentWrapper,
-    ContentDivWrapper,
-    RequestPageContainer,
-    RequestPageWrapper,
+  ContainerContentWrapper,
+  ContentDivWrapper,
+  RequestPageContainer,
+  RequestPageWrapper,
 } from "./M_styleRequestPlacePage";
 
 const M_RequestPlacePage = () => {
@@ -21,7 +21,7 @@ const M_RequestPlacePage = () => {
           <ContainerContentWrapper>
             {/* 거리요청 페이지 화면 위치 타이틀 상태 */}
             <ContentDivWrapper>
-              <span>TRIPVIEW 거리요청</span>
+              <span>TRIPVIEW 거리 등록</span>
               <Outlet />
             </ContentDivWrapper>
           </ContainerContentWrapper>

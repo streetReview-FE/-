@@ -3,8 +3,7 @@ import styled from "styled-components";
 import testEventBanner from "../../../../assets/test-eventbanner.png";
 import type { Coordinates, Review } from "../../../../constants/interface";
 import GetPostList from "../../../Posts/GetPosts";
-import GetPostNearList from "../../../Posts/GetPostsNear";
-import MainModal from "../../MainModal/MainModal";
+import MGetPostNearList from "../../../Posts/M_Post/M_GetPostsNear";
 
 const M_MainMappingReview = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
@@ -37,10 +36,9 @@ const M_MainMappingReview = () => {
             <GetPostList coordinate={currentCoord} reviews={reviews} />
           )}
           {currentCoord && viewMode === 'nearby' &&(
-            <GetPostNearList coordinate={currentCoord} reviews={reviews}/>
+            <MGetPostNearList coordinate={currentCoord} reviews={reviews}/>
           )}
       </MainReviewContainer>
-      {isOpenModal && <MainModal />}
       {/* 이벤트 배너가 들어가는 곳 */}
       <MainReviewContentEventBanner src={testEventBanner} alt="testUser" />
     </MainReviewWrapper>

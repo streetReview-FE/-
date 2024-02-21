@@ -17,7 +17,6 @@ export const MyPageWrapper = styled.div`
   height: 90vh;
   background-color: rgba(255, 255, 255, 1);
   border-radius: 1.25rem 1.25rem 0rem 0rem;
-  box-shadow: 0rem 0.3rem 0.3rem 0rem rgba(0, 0, 0, 0.25);
   z-index: 50;
 `;
 // 마이페이지 오른쪽 화면

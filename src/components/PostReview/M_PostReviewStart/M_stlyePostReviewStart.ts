@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Colors from "../../../../Styles/Colors";
+import Colors from "../../../Styles/Colors";
 export const RequestContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -7,7 +7,6 @@ export const RequestContainer = styled.div`
   align-items: center;
   margin-top: 1rem;
   position: relative;
-  width: 100%;
 `;
 
 export const RequestSpan = styled.span`
@@ -18,8 +17,8 @@ export const RequestSpan = styled.span`
 `;
 
 export const RequestIcon = styled.div<{ $img: string }>`
-  width: 17.43019rem;
-  height: 19.23213rem;
+  width: 8.125rem;
+  height: 8.125rem;
   padding: 1.28319rem 0rem 0rem 0.214rem;
   flex-direction: column;
   justify-content: flex-end;
@@ -28,7 +27,7 @@ export const RequestIcon = styled.div<{ $img: string }>`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  margin-top: 3.44rem;
+  margin-top: 6.04rem;
 `;
 
 export const RequestCheckButton = styled.div`

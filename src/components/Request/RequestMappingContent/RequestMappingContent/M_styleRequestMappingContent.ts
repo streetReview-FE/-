@@ -3,16 +3,20 @@ import Colors from "../../../../Styles/Colors";
 
 export const RequestCheckSearchBarWrapper = styled.div`
   margin-top: 1.44rem;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 export const InputForm = styled.form`
-  width: 13.5625rem;
+  width: 100%;
   height: 22.625rem;
   border-radius: 0.625rem;
   background-color: ${Colors.request.backgroundColor};
   padding-top: 0.5rem;
 
   color: ${Colors.request.buttonColor};
-  font-size: 0.7rem;
+  font-size: 1rem;
   font-weight: 700;
   &::placeholder {
     color: ${Colors.request.buttonColor};
@@ -29,6 +33,10 @@ export const InputFormInputContent = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  label {
+    margin-bottom: 0.4rem;
+  }
 `;
 export const InputFormInput = styled.input`
   height: 2rem;
@@ -37,7 +45,7 @@ export const InputFormInput = styled.input`
   padding-left: 1.75rem;
 
   color: ${Colors.request.buttonColor};
-  font-size: 0.5rem;
+  font-size: 0.75rem;
   font-weight: 700;
   &::placeholder {
     color: ${Colors.request.buttonColor};

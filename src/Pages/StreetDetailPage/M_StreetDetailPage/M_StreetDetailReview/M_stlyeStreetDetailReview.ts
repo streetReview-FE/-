@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Colors from "../../../../Styles/Colors";
 
 // 모달
 export const ModalContentReview = styled.div`
@@ -7,14 +8,15 @@ export const ModalContentReview = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 90%;
+  width: 95%;
+  margin-top: 1.06rem;
 `;
 // 리뷰쓰러가기
 export const ModalContentReviewTop = styled.div`
-  width: 95%;
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
 `;
 export const ModalContentReviewTopArrow = styled.div`
   color: rgba(239, 125, 22, 1);
@@ -22,25 +24,48 @@ export const ModalContentReviewTopArrow = styled.div`
   font-weight: 700;
 `;
 export const ModalContentReviewTopArrowIcon = styled.div`
-  width: 1rem;
-  height: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  transform: rotate(180deg);
 `;
 // 리뷰 내용
 export const ModalContentReviewContent = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
   position: relative;
-  width: 27.1875rem;
-  height: 6.6875rem;
+  width: 10.3125rem;
+  height: 10.3125rem;
   border-radius: 0.625rem;
-  background: #fff;
+  background: ${Colors.request.backgroundColor};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  color: #000;
+  padding-top: 2.06rem;
 
+  span {
+    color: #7b7b7b;
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin-bottom: 0.7rem;
+  }
+  color: #7b7b7b;
   font-size: 0.625rem;
-  font-weight: 500;
+  font-weight: 400;
+
   z-index: 3;
+`;
+export const ContentNavigateWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 0.3rem;
+  right: 1rem;
+  color: ${Colors.orange};
+  font-size: 0.6rem;
+  font-weight: 700;
+`;
+export const ModalContentReviewBottomArrowIcon = styled.div`
+  width: 1rem;
+  height: 1rem;
 `;
 // 회색 화살표, 리뷰 내용
 export const ModalContentReviewContentGrayArrowIcon = styled.img`
@@ -84,11 +109,18 @@ export const RevieWCardDate = styled.div`
   align-items: center;
   justify-content: flex-end;
 `;
+
+export const ReviewContent = styled.div`
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+`;
 export const ReviewCardImg = styled.div<{ $img: string }>`
   position: relative;
-  margin-top: -0.9rem;
-  width: 26.6875rem;
-  height: 16.5625rem;
+  width: 10.3125rem;
+  height: 10.3125rem;
   object-fit: cover;
   background: ${(props) => `url(${props.$img})`};
   background-repeat: no-repeat;
@@ -106,7 +138,7 @@ export const ReviewCardTagWrapper = styled.div`
   color: white;
   font-size: 0.75rem;
   font-weight: 700;
-  margin-top: 2rem;
+  margin-top: 1rem;
 `;
 
 export const ReviewCardTagBox1 = styled.div`

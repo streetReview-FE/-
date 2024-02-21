@@ -15,7 +15,7 @@ const PostReviewImgChk = () => {
       {/* 10.19-3.81rem */}
       <div style={{ marginTop: "6.38rem" }} />
       <PostReviewTopIcon $img={IconCamera} />
-      <PostReviewTopSpan>의 사진도 있나요?</PostReviewTopSpan>
+      <PostReviewTopSpan>사진도 있나요?</PostReviewTopSpan>
       <PostReviewImgChkButtonWarpper>
         <PostReviewBottomNextButton
           $width={9.0625}
