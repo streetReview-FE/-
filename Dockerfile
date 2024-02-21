@@ -3,6 +3,8 @@ FROM node:14 AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
+COPY /home/darren/semtlessl/semtle.crt semtle.crt
+COPY /home/darren/semtlessl/semtle.key semtle.key
 COPY . ./
 RUN npm run build
 
