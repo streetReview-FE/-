@@ -1,5 +1,5 @@
-import { MenuState, MenuAction, SELECT_MENU } from "./action";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { MenuState } from "./action";
 
 export const initialState: MenuState = {
   menus: [

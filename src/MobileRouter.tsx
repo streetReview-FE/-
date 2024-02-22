@@ -26,7 +26,7 @@ const MobileRouter = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/googleMap" element={<GoogleMaps />} />
-          <Route path="/" element={<MMainPage />} />
+          <Route path="" element={<MMainPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/google/auth" element={<RedirectionPage />} />
 
