@@ -72,8 +72,6 @@
   },
   "proxy": "http://semtle.catholic.ac.kr:8085",
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@types/google.maps": "^3.54.10",
-    "gh-pages": "^6.1.1"
+    "@types/google.maps": "^3.54.10"
   }
 }
